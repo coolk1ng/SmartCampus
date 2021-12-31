@@ -1,0 +1,57 @@
+# 端口,项目上下文
+server:
+  port: 10086
+  servlet:
+    context-path: /smart-campus
+# 数据库配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://110.40.236.91:3306/smart_campus?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+    hikari:
+      # 连接池名
+      pool-name: DataHikarCP
+      # 最小空闲连接数
+      minimum-idle: 5
+      # 空闲连接存活最大时间,默认10min
+      idle-timeout: 18000
+      # 最大连接数
+      maximum-pool-size: 10
+      # 从连接池返回的连接自动提交
+      auto-commit: true
+      # 连接最大存活时间,0表示永久存活,默认30min
+      max-lifetime: 1800000
+      # 连接超时时间,默认30s
+      connection-timeout: 30000
+      # 测试连接是否可用的查询语句
+      connection-test-query: SELECT 1
+  # redis配置
+  redis:
+    database: 1
+    host: 110.40.236.91
+    port: 6379
+    password: gongxiwu
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 0
+# mybatis配置
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/**/*.xml
+  check-config-location: true
+# 分页配置
+pagehelper:
+  helperDialect: mysql
+  supportMethodsArguments: true
+# 日志配置
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.codesniper.smartcampus: debug #控制台打印sql
