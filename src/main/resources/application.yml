@@ -55,3 +55,13 @@ logging:
   config: classpath:logback-spring.xml
   level:
     com.codesniper.smartcampus: debug #控制台打印sql
+
+jwt:
+  # jwt存储的请求头
+  tokenHeader: Authorization
+  # jwt加解密使用的秘钥
+  secret: yeb-secret
+  # jwt的超期限时间
+  expiration: 604800
+  # jwt负载中拿到开头
+  tokenHead: Bearer

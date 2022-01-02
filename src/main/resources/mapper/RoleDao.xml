@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codesniper.smartcampus.dao.RoleDao">
+
+    <resultMap type="com.codesniper.smartcampus.entity.Role" id="RoleMap">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="roleId" column="ROLE_ID" jdbcType="INTEGER"/>
+        <result property="roleCode" column="ROLE_CODE" jdbcType="VARCHAR"/>
+        <result property="roleName" column="ROLE_NAME" jdbcType="VARCHAR"/>
+    </resultMap>
+
+</mapper>
+

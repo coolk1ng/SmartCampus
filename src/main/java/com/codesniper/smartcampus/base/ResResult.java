@@ -42,7 +42,7 @@ public class ResResult {
      * @return ResResult
      */
     public static ResResult success(String message){
-        return new ResResult(true,null,"-1","success");
+        return new ResResult(true,null,"-1",message);
     }
 
     /**
@@ -52,6 +52,15 @@ public class ResResult {
      */
     public static ResResult success(Object data){
         return new ResResult(true,data,"-1","success");
+    }
+
+    /**
+     * 成功时返回信息
+     * @param data
+     * @return ResResult
+     */
+    public static ResResult success(String message,Object data){
+        return new ResResult(true,data,"-1",message);
     }
 
     /**
