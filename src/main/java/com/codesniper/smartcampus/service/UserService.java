@@ -17,10 +17,11 @@ public interface UserService {
      * 登录后返回token
      * @param username
      * @param password
+     * @param code
      * @param httpServletRequest
      * @return ResResult
      */
-    ResResult login(String username, String password, HttpServletRequest httpServletRequest);
+    ResResult login(String username, String password, String code, HttpServletRequest httpServletRequest);
 
     /**
      * 根据用户名获取用户信息

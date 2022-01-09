@@ -5,6 +5,7 @@ import com.codesniper.smartcampus.config.security.JwtTokenUtil;
 import com.codesniper.smartcampus.entity.User;
 import com.codesniper.smartcampus.dao.UserDao;
 import com.codesniper.smartcampus.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,14 +44,19 @@ public class UserServiceImpl implements UserService {
     private String tokenHead;
 
     @Override
-    public ResResult login(String username, String password, HttpServletRequest httpServletRequest) {
+    public ResResult login(String username, String password, String code, HttpServletRequest httpServletRequest) {
+        //校验验证码
+        String captcha = (String) httpServletRequest.getSession().getAttribute("captcha");
+        if (StringUtils.isBlank(captcha) || !captcha.equalsIgnoreCase(code)){
+            return ResResult.fail("验证码错误,请重新输入!");
+        }
         //根据用户名获取userDetails
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         if (null==userDetails || !passwordEncoder.matches(password,userDetails.getPassword())){
-            return ResResult.fail("用户名或密码不正确");
+            return ResResult.fail("用户名或密码不正确!");
         }
         if (!userDetails.isEnabled()){
-            return ResResult.fail("该账户被禁用");
+            return ResResult.fail("该账户被禁用!");
         }
         //更新security登录对象
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

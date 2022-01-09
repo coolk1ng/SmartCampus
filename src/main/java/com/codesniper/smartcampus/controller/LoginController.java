@@ -38,7 +38,7 @@ public class LoginController {
     @PostMapping(value = "/login")
     public ResResult login(LoginParams loginParams, HttpServletRequest httpServletRequest){
         logger.info("用户登录传入参数:{}", JSONObject.toJSONString(loginParams));
-        return userService.login(loginParams.getUsername(),loginParams.getPassword(),httpServletRequest);
+        return userService.login(loginParams.getUsername(),loginParams.getPassword(),loginParams.getCode(),httpServletRequest);
     }
 
     @ApiOperation(value = "根据用户名获取当前用户信息")
