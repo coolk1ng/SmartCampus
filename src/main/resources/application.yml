@@ -44,6 +44,7 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+    jdbc-type-for-null: 'null'
   mapper-locations: classpath:mapper/**/*.xml
   check-config-location: true
 # 分页配置
@@ -60,7 +61,7 @@ jwt:
   # jwt存储的请求头
   tokenHeader: Authorization
   # jwt加解密使用的秘钥
-  secret: yeb-secret
+  secret: sc-secret
   # jwt的超期限时间
   expiration: 604800
   # jwt负载中拿到开头

@@ -1,6 +1,5 @@
 package com.codesniper.smartcampus.config.security;
 
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -17,14 +16,13 @@ import java.util.Map;
  * JwtToken工具类
  *
  * @author CodeSniper
- * @since 2022-01-03
+ * @since 2021-1-1
  */
 @Component
 public class JwtTokenUtil {
 
-    public static final String CLAIM_KEY_USERNAME = "sub";
-    public static final String CLAIM_KEY_CREATED = "created";
-
+    private static final String CLAIM_KEY_USERNAME = "sub";
+    private static final String CLAIM_KEY_CREATED = "created";
     @Value("${jwt.secret}")
     private String secret;
     @Value("${jwt.expiration}")
@@ -36,23 +34,10 @@ public class JwtTokenUtil {
      * @return String
      */
     public String generateToken(UserDetails userDetails) {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
-        map.put(CLAIM_KEY_CREATED, new Date());
-        return generateToken(map);
-    }
-
-    /**
-     * 根据荷载生成JwtToken
-     * @param claims
-     * @return String
-     */
-    public String generateToken(Map<String, Object> claims) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, secret)
-                .compact();
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
+        claims.put(CLAIM_KEY_CREATED, new Date());
+        return generateToken(claims);
     }
 
     /**
@@ -72,21 +57,14 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 从token中获取荷载
+     * 验证token是否有效
      * @param token
-     * @return Claims
+     * @param userDetails
+     * @return boolean
      */
-    private Claims getClaimsFromToken(String token) {
-        Claims claims = null;
-        try {
-            claims = Jwts.parser()
-                    .setSigningKey(secret)
-                    .parseClaimsJws(token)
-                    .getBody();
-        } catch (ExpiredJwtException e) {
-            e.printStackTrace();
-        }
-        return claims;
+    public boolean validateToken(String token, UserDetails userDetails) {
+        String username = getUserNameFromToken(token);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
     /**
@@ -110,25 +88,6 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 生成token失效时间
-     * @return Date
-     */
-    private Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + expiration * 1000);
-    }
-
-    /**
-     * 验证token是否有效
-     * @param token
-     * @param userDetails
-     * @return boolean
-     */
-    public boolean validateToken(String token, UserDetails userDetails) {
-        String username = getUserNameFromToken(token);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
-    }
-
-    /**
      * 判断token是否可以被刷新
      * @param token
      * @return boolean
@@ -146,5 +105,44 @@ public class JwtTokenUtil {
         Claims claims = getClaimsFromToken(token);
         claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
+    }
+
+    /**
+     * 从token中获取荷载
+     * @param token
+     * @return Claims
+     */
+    private Claims getClaimsFromToken(String token) {
+        Claims claims = null;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            e.printStackTrace();
+        }
+        return claims;
+    }
+
+    /**
+     * 根据载荷生成JWT TOKEN
+     * @param claims
+     * @return String
+     */
+    private String generateToken(Map<String, Object> claims) {
+        return Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(generateExpirationDate())
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
+    }
+
+    /**
+     * 生成token的失效时间
+     * @return Date
+     */
+    private Date generateExpirationDate() {
+        return new Date(System.currentTimeMillis() + expiration * 1000);
     }
 }

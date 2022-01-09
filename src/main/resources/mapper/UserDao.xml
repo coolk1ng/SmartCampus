@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.codesniper.smartcampus.dao.UserDao">
-
     <resultMap type="com.codesniper.smartcampus.entity.User" id="UserMap">
         <result property="id" column="ID" jdbcType="VARCHAR"/>
         <result property="userId" column="USER_ID" jdbcType="INTEGER"/>
@@ -10,9 +9,10 @@
     </resultMap>
 
     <select id="getUserInfoByUsername" resultType="com.codesniper.smartcampus.entity.User">
-        SELECT ID, USER_ID, USERNAME, PASSWORD
+        SELECT ID, USER_ID, USERNAME, PASSWORD, ENABLED
         FROM T_USER
-        WHERE ENABLED=true
+        WHERE ENABLED = true
+          AND USERNAME = #{username}
     </select>
 
 </mapper>
