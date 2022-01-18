@@ -1,8 +1,11 @@
 package com.codesniper.smartcampus.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
 import io.swagger.annotations.*;
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 
 /**
  * 菜单表(Menu)实体类
@@ -51,6 +54,10 @@ public class Menu implements Serializable {
      */
     private String enable;
 
-
+    /**
+     * 子菜单
+     */
+    @Transient
+    private List<Menu> children;
 }
 

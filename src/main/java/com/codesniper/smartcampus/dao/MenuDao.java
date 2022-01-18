@@ -1,8 +1,8 @@
 package com.codesniper.smartcampus.dao;
 
 import com.codesniper.smartcampus.entity.Menu;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Pageable;
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
 /**
@@ -11,7 +11,15 @@ import java.util.List;
  * @author CodeSniper
  * @since 2022-01-03 02:11:47
  */
+@Mapper
 public interface MenuDao {
+
+    /**
+     * 根据用户id查询菜单列表
+     * @param userId
+     * @return List<Menu>
+     */
+    List<Menu> getMenusByUserId(Integer userId);
 
 }
 

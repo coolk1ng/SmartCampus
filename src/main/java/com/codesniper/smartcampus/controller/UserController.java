@@ -1,13 +1,9 @@
 package com.codesniper.smartcampus.controller;
 
-import com.codesniper.smartcampus.entity.User;
-import com.codesniper.smartcampus.service.UserService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 
 /**
  * 用户表(User)表控制层
@@ -18,6 +14,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("user")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 }
 

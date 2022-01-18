@@ -1,13 +1,9 @@
 package com.codesniper.smartcampus.controller;
 
-import com.codesniper.smartcampus.entity.Role;
-import com.codesniper.smartcampus.service.RoleService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 
 /**
  * 角色表(Role)表控制层
@@ -18,6 +14,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("role")
 public class RoleController {
+
+    private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
 }
 

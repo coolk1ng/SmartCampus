@@ -1,8 +1,9 @@
 package com.codesniper.smartcampus.service;
 
+
 import com.codesniper.smartcampus.entity.Menu;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
 
 /**
  * 菜单表(Menu)表服务接口
@@ -11,5 +12,11 @@ import org.springframework.data.domain.PageRequest;
  * @since 2022-01-03 02:11:47
  */
 public interface MenuService {
+
+    /**
+     * 查询菜单列表
+     * @return List<Menu>
+     */
+    List<Menu> getMenuByUserId();
 
 }

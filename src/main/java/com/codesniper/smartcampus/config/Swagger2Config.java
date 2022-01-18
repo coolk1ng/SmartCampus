@@ -18,7 +18,7 @@ import java.util.List;
  * Swagger配置
  *
  * @author CodeSniper
- * @since 2021-1-1
+ * @since 2021-01-01
  */
 @EnableSwagger2
 @Configuration
@@ -39,9 +39,10 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("smart_campus API Doc")
+                .title("智慧校园 API Doc")
                 .description("疫情期间进出校园管理系统接口文档.")
                 .version("1.0")
+                .contact(new Contact("CodeSniper","null","codesniperrrrr@gmail.com"))
                 .build();
     }
 

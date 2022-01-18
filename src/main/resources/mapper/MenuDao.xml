@@ -13,6 +13,37 @@
         <result property="parentId" column="PARENT_ID" jdbcType="INTEGER"/>
         <result property="enable" column="ENABLE" jdbcType="VARCHAR"/>
     </resultMap>
+    
+    <resultMap id="menus" type="com.codesniper.smartcampus.entity.Menu" extends="MenuMap">
+        <collection property="children" ofType="com.codesniper.smartcampus.entity.Menu">
+            <id property="id" column="CHILDREN_ID"/>
+            <result property="menuId" column="CHILDREN_MENU_ID"/>
+            <result property="url" column="CHILDREN_URL"/>
+            <result property="path" column="CHILDREN_PATH"/>
+            <result property="component" column="CHILDREN_COMPONENT"/>
+            <result property="name" column="CHILDREN_NAME"/>
+            <result property="icon" column="CHILDREN_ICON"/>
+            <result property="parentId" column="CHILDREN_PARENT_ID"/>
+            <result property="enable" column="CHILDREN_ENABLE"/>
+        </collection>
+    </resultMap>
 
+    <select id="getMenusByUserId" resultMap="menus">
+        SELECT c.*,
+               d.ID        AS CHILDREN_ID,
+               d.MENU_ID   AS CHILDREN_MENU_ID,
+               d.URL       AS CHILDREN_URL,
+               d.PATH      AS CHILDREN_PATH,
+               d.COMPONENT AS CHILDREN_COMPONENT,
+               d.NAME      AS CHILDREN_NAME,
+               d.ICON      AS CHILDREN_ICON,
+               d.PARENT_ID AS CHILDREN_PARENT_ID,
+               d.ENABLE    AS CHILDREN_ENABLE
+        FROM T_USER_ROLE a
+                 INNER JOIN T_MENU_ROLE b ON a.ROLE_ID = b.ROLE_ID
+                 INNER JOIN T_MENU c ON b.MENU_ID = c.MENU_ID
+                 INNER JOIN T_MENU d ON c.MENU_ID = d.PARENT_ID
+        WHERE a.USER_ID = #{userId};
+    </select>
 </mapper>
 
