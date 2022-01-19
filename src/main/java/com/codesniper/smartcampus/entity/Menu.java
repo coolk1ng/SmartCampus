@@ -53,11 +53,5 @@ public class Menu implements Serializable {
      * 是否启用
      */
     private String enable;
-
-    /**
-     * 子菜单
-     */
-    @Transient
-    private List<Menu> children;
 }
 
