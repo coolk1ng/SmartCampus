@@ -53,16 +53,10 @@ public class LoginController {
         return ResResult.success(user);
     }
 
-    @ApiOperation(value = "退出登录")
+    @ApiOperation(value = "注销")
     @PostMapping(value = "/logout")
     public ResResult logout(){
         return ResResult.success("注销成功");
-    }
-
-    @ApiOperation(value = "测试")
-    @PostMapping(value = "/test")
-    public ResResult test(String username){
-        return ResResult.success(userService.getUserInfoByUsername(username));
     }
 
 }

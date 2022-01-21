@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codesniper.smartcampus.dao.UserInfoDao">
+
+    <resultMap type="com.codesniper.smartcampus.entity.UserInfo" id="UserInfoMap">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="userId" column="USER_ID" jdbcType="VARCHAR"/>
+        <result property="sex" column="SEX" jdbcType="VARCHAR"/>
+        <result property="class" column="CLASS" jdbcType="VARCHAR"/>
+        <result property="college" column="COLLEGE" jdbcType="VARCHAR"/>
+        <result property="telephone" column="TELEPHONE" jdbcType="VARCHAR"/>
+        <result property="idCardNum" column="ID_CARD_NUM" jdbcType="VARCHAR"/>
+        <result property="domicile" column="DOMICILE" jdbcType="VARCHAR"/>
+        <result property="birthTime" column="BIRTH_TIME" jdbcType="TIMESTAMP"/>
+        <result property="fatherTel" column="FATHER_TEL" jdbcType="VARCHAR"/>
+        <result property="motherTel" column="MOTHER_TEL" jdbcType="VARCHAR"/>
+        <result property="politicalStatus" column="POLITICAL_STATUS" jdbcType="VARCHAR"/>
+        <result property="age" column="AGE" jdbcType="VARCHAR"/>
+        <result property="cognition" column="COGNITION" jdbcType="VARCHAR"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="IS_DELETE" jdbcType="VARCHAR"/>
+    </resultMap>
+
+</mapper>
+

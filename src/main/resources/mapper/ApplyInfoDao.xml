@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codesniper.smartcampus.dao.ApplyInfoDao">
+
+    <resultMap type="com.codesniper.smartcampus.entity.ApplyInfo" id="ApplyInfoMap">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="userId" column="USER_ID" jdbcType="VARCHAR"/>
+        <result property="applyReason" column="APPLY_REASON" jdbcType="VARCHAR"/>
+        <result property="leaveTime" column="LEAVE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="returnTime" column="RETURN_TIME" jdbcType="TIMESTAMP"/>
+        <result property="days" column="DAYS" jdbcType="VARCHAR"/>
+        <result property="homeAddress" column="HOME_ADDRESS" jdbcType="VARCHAR"/>
+        <result property="guardianTel" column="GUARDIAN_TEL" jdbcType="VARCHAR"/>
+        <result property="trafficType" column="TRAFFIC_TYPE" jdbcType="VARCHAR"/>
+        <result property="trafficNum" column="TRAFFIC_NUM" jdbcType="VARCHAR"/>
+        <result property="managerId" column="MANAGER_ID" jdbcType="VARCHAR"/>
+        <result property="applyState" column="APPLY_STATE" jdbcType="VARCHAR"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+</mapper>
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codesniper.smartcampus.dao.ApprovalRecordDao">
+
+    <resultMap type="com.codesniper.smartcampus.entity.ApprovalRecord" id="ApprovalRecordMap">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="userId" column="USER_ID" jdbcType="VARCHAR"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="approvalPerson" column="APPROVAL_PERSON" jdbcType="VARCHAR"/>
+        <result property="approvalResult" column="APPROVAL_RESULT" jdbcType="VARCHAR"/>
+        <result property="approvalTime" column="APPROVAL_TIME" jdbcType="TIMESTAMP"/>
+        <result property="approvalReason" column="APPROVAL_REASON" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+</mapper>
+
