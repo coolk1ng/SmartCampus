@@ -30,7 +30,7 @@ public class UserInfo implements Serializable {
      */     
     private String sex; 
     /**
-     * 班级
+     * 学院
      */     
     private String college; 
     /**
@@ -44,7 +44,15 @@ public class UserInfo implements Serializable {
     /**
      * 户籍地
      */     
-    private String domicile; 
+    private String domicile;
+    /**
+     * 角色编码
+     */
+    private String roleId;
+    /**
+     * 上级管理员用户编码
+     */
+    private String managerId;
     /**
      * 出生日期
      */
@@ -84,11 +92,7 @@ public class UserInfo implements Serializable {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date updateTime; 
-    /**
-     * 逻辑删除
-     */     
-    private String isDelete; 
+    private Date updateTime;
     /**
      * 班级
      */     

@@ -6,7 +6,7 @@
         <result property="id" column="ID" jdbcType="VARCHAR"/>
         <result property="userId" column="USER_ID" jdbcType="VARCHAR"/>
         <result property="sex" column="SEX" jdbcType="VARCHAR"/>
-        <result property="class" column="CLASS" jdbcType="VARCHAR"/>
+        <result property="className" column="CLASS_NAME" jdbcType="VARCHAR"/>
         <result property="college" column="COLLEGE" jdbcType="VARCHAR"/>
         <result property="telephone" column="TELEPHONE" jdbcType="VARCHAR"/>
         <result property="idCardNum" column="ID_CARD_NUM" jdbcType="VARCHAR"/>
@@ -19,8 +19,65 @@
         <result property="cognition" column="COGNITION" jdbcType="VARCHAR"/>
         <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
-        <result property="isDelete" column="IS_DELETE" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <select id="getStudentList" resultType="com.codesniper.smartcampus.entity.UserInfo" parameterType="com.codesniper.smartcampus.dto.StudentManageReq">
+        SELECT USER_ID, NAME, SEX, CLASS_NAME, COLLEGE, TELEPHONE, UPDATE_TIME
+        FROM T_USER_INFO WHERE MANAGER_ID=#{managerId}
+        <if test="name!=null and name!=''">
+            AND NAME LIKE CONCAAT('%',CONCAT(#{name},'%'))
+        </if>
+        <if test="sex!=null and sex!=''">
+            AND SEX=#{sex}
+        </if>
+        <if test="className!=null and className!=''">
+            AND CLASS_NAME =#{className}
+        </if>
+    </select>
+
+    <select id="queryById" resultType="com.codesniper.smartcampus.entity.UserInfo">
+        SELECT *
+        FROM T_USER_INFO
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <insert id="addStudentInfo" parameterType="com.codesniper.smartcampus.entity.UserInfo">
+        INSERT INTO T_USER_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                ID,
+            </if>
+            <if test="userId!=null and userId!=''">
+                USER_ID,
+            </if>
+            <if test="name!=null and name!=''">
+                NAME,
+            </if>
+            <if test="className!=null and className!=''">
+                CLASS_NAME,
+            </if>
+            <if test="college!=null and college!=''">
+                COLLEGE
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                #{id},
+            </if>
+            <if test="userId!=null and userId!=''">
+                #{userId},
+            </if>
+            <if test="name!=null and name!=''">
+                #{name},
+            </if>
+            <if test="className!=null and className!=''">
+                #{className},
+            </if>
+            <if test="college!=null and college!=''">
+                #{college}
+            </if>
+        </trim>
+    </insert>
 </mapper>
 
