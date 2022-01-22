@@ -7,6 +7,7 @@ import com.codesniper.smartcampus.dao.MenuDao;
 import com.codesniper.smartcampus.entity.Menu;
 import com.codesniper.smartcampus.entity.User;
 import com.codesniper.smartcampus.service.MenuService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -31,10 +32,10 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> getMenuByUserId() {
-        Integer id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+        String id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
         ValueOperations<String, Object> operations = redisTemplate.opsForValue();
         String redisKey = "menu_"+id;
-        if (null == id) {
+        if (StringUtils.isBlank(id)) {
             return null;
         } else {
             //redis不存在key

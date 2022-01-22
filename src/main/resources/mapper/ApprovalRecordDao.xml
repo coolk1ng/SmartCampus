@@ -14,5 +14,39 @@
         <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <select id="getApprovalRecordList" resultType="com.codesniper.smartcampus.entity.ApprovalRecord" parameterType="com.codesniper.smartcampus.dto.ApprovalRecordReq">
+        SELECT ID,
+        NAME,
+        USER_ID,
+        APPROVAL_PERSON,
+        APPROVAL_RESULT,
+        APPROVAL_REASON,
+        APPROVAL_TIME,
+        UPDATE_TIME,
+        CREATE_TIME
+        FROM T_APPROVAL_RECORD
+        WHERE APPROVAL_PERSON=#{approvalPerson}
+        <if test="name!=null and name!=''">
+            AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
+        </if>
+        <if test="approvalResult!=null and approvalResult!=''">
+            AND APPROVAL_RESULT =#{approvalResult}
+        </if>
+    </select>
+
+    <select id="queryByUserId" resultType="com.codesniper.smartcampus.entity.ApprovalRecord">
+        SELECT *
+        FROM T_APPROVAL_RECORD
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <update id="editApprovalRecord" parameterType="com.codesniper.smartcampus.entity.ApprovalRecord">
+        UPDATE T_APPROVAL_RECORD
+        SET NAME           =#{name},
+            APPROVAL_RESULT=#{approvalResult},
+            APPROVAL_REASON=#{approvalReason},
+            UPDATE_TIME=#{updateTime}
+        WHERE USER_ID = #{userId}
+    </update>
 </mapper>
 

@@ -2,6 +2,8 @@ package com.codesniper.smartcampus.entity;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.*;
 import lombok.Data;
 
@@ -30,14 +32,15 @@ public class ApprovalRecord implements Serializable {
     /**
      * 审批人
      */     
-    private String approvalPerson; 
+    private String approvalPerson;
     /**
      * 审批结果
      */     
     private String approvalResult; 
     /**
      * 审批时间
-     */     
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date approvalTime; 
     /**
      * 批准或驳回原因
@@ -45,11 +48,13 @@ public class ApprovalRecord implements Serializable {
     private String approvalReason; 
     /**
      * 更新时间
-     */     
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updateTime; 
     /**
      * 创建时间
-     */     
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime; 
 
 

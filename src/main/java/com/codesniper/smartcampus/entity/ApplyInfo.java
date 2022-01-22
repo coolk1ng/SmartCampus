@@ -2,6 +2,8 @@ package com.codesniper.smartcampus.entity;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.*;
 import lombok.Data;
 
@@ -29,11 +31,13 @@ public class ApplyInfo implements Serializable {
     private String applyReason; 
     /**
      * 离校时间
-     */     
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date leaveTime; 
     /**
      * 返校时间
-     */     
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date returnTime; 
     /**
      * 离校具体天数
@@ -62,14 +66,21 @@ public class ApplyInfo implements Serializable {
     /**
      * 申请状态
      */     
-    private String applyState; 
+    private String applyState;
+    /**
+     * 申请时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date applyTime;
     /**
      * 创建时间
-     */     
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime; 
     /**
      * 更新时间
-     */     
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updateTime; 
 
 

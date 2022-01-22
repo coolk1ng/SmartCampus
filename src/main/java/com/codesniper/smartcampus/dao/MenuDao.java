@@ -19,7 +19,7 @@ public interface MenuDao {
      * @param userId
      * @return List<Menu>
      */
-    List<Menu> getMenusByUserId(Integer userId);
+    List<Menu> getMenusByUserId(String userId);
 
 }
 
