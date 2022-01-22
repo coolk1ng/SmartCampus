@@ -26,7 +26,7 @@ public class SmartCampusApplication {
         }
         logger.info("\n----------------------------------------------------------\n\t" +
                 "Application  is running! Access URLs:\n\t" +
-                "Local: \t\thttp://"+ip+":" + port + path + "\n\t" +
+                "local: \t\thttp://"+ip+":" + port + path + "\n\t" +
                 "doc: \thttp://" + ip + ":" + port + path + "/doc.html"+"\n\t" +
                 "\n----------------------------------------------------------");
     }
