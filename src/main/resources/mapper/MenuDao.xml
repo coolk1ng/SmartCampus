@@ -19,7 +19,8 @@
         FROM T_USER_ROLE a
                  INNER JOIN T_MENU_ROLE b ON a.ROLE_ID = b.ROLE_ID
                  INNER JOIN T_MENU c ON b.MENU_ID = c.MENU_ID
-        WHERE a.USER_ID = #{userId};
+        WHERE a.USER_ID = #{userId}
+        GROUP BY b.MENU_ID;
     </select>
 </mapper>
 

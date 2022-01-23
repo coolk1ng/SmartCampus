@@ -19,4 +19,23 @@ public interface UserInfoService {
      */
     PageInfo<UserInfo> getStudentList(StudentManageReq dto);
 
+    /**
+     * 新增,编辑
+     * @param dto
+     */
+    void addAndEditStudent(UserInfo dto);
+
+    /**
+     * 批量删除
+     * @param userIds
+     * @return void
+     */
+    void deleteStudentInfo(String userIds);
+
+    /**
+     * 查询详情
+     * @param userId
+     * @return UserInfo
+     */
+    UserInfo getDetail(String userId);
 }

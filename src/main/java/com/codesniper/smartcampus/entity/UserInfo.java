@@ -24,7 +24,15 @@ public class UserInfo implements Serializable {
     /**
      * 用户ID
      */     
-    private String userId; 
+    private String userId;
+    /**
+     * 学号
+     */
+    private String studentId;
+    /**
+     * 姓名
+     */
+    private String name;
     /**
      * 性别
      */     
@@ -57,7 +65,7 @@ public class UserInfo implements Serializable {
      * 出生日期
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date birthTime; 
     /**
      * 父亲联系方式
@@ -78,20 +86,18 @@ public class UserInfo implements Serializable {
     /**
      * 任职情况
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private String cognition; 
     /**
      * 创建时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime; 
     /**
      * 更新时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date updateTime;
     /**
      * 班级

@@ -1,6 +1,8 @@
 package com.codesniper.smartcampus.dao;
 
 import com.codesniper.smartcampus.dto.StudentManageReq;
+import com.codesniper.smartcampus.dto.UserMenu;
+import com.codesniper.smartcampus.dto.UserRoleDto;
 import com.codesniper.smartcampus.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -32,8 +34,57 @@ public interface UserInfoDao {
     /**
      * 新增
      * @param dto
+     * @return Integer
+     */
+    Integer addStudentInfo(UserInfo dto);
+
+    /**
+     * 编辑
+     * @param dto
+     * @return Integer
+     */
+    Integer EditStudentInfo(UserInfo dto);
+
+    /**
+     * 批量删除
+     * @param arr
      * @return void
      */
-    void addStudentInfo(UserInfo dto);
+    void deleteStudentInfo(String[] arr);
+
+    /**
+     * 新增用户权限
+     * @param dto
+     * @return void
+     */
+    void addUserRole(UserRoleDto dto);
+
+    /**
+     * 新增用户新增菜单
+     * @param dto
+     * @return void
+     */
+    void addMenusForUser(UserMenu dto);
+
+    /**
+     * 删除MenuRole表
+     * @param arr
+     * @return void
+     */
+    void deleteMenuRole(String[] arr);
+
+    /**
+     * 删除User表
+     * @param arr
+     * @return void
+     */
+    void deleteUser(String[] arr);
+
+    /**
+     * 删除UserRole表
+     * @param arr
+     * @return void
+     */
+    void deleteUserRole(String[] arr);
 }
 

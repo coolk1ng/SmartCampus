@@ -19,5 +19,19 @@ public interface UserDao {
      */
     User getUserInfoByUsername(String username);
 
+    /**
+     * 新增
+     * @param dto
+     * @return void
+     */
+    void addUserInfo(User dto);
+
+    /**
+     * 编辑
+     * @param dto
+     * @return void
+     */
+    void editUserInfo(User dto);
+
 }
 

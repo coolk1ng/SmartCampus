@@ -22,10 +22,10 @@
     </resultMap>
 
     <select id="getStudentList" resultType="com.codesniper.smartcampus.entity.UserInfo" parameterType="com.codesniper.smartcampus.dto.StudentManageReq">
-        SELECT USER_ID, NAME, SEX, CLASS_NAME, COLLEGE, TELEPHONE, UPDATE_TIME
+        SELECT ID, STUDENT_ID, USER_ID, NAME, SEX, CLASS_NAME, COLLEGE, TELEPHONE, UPDATE_TIME
         FROM T_USER_INFO WHERE MANAGER_ID=#{managerId}
         <if test="name!=null and name!=''">
-            AND NAME LIKE CONCAAT('%',CONCAT(#{name},'%'))
+            AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
         </if>
         <if test="sex!=null and sex!=''">
             AND SEX=#{sex}
@@ -50,6 +50,12 @@
             <if test="userId!=null and userId!=''">
                 USER_ID,
             </if>
+            <if test="roleId!=null and roleId!=''">
+                ROLE_ID,
+            </if>
+            <if test="studentId!=null and studentId!=''">
+                STUDENT_ID,
+            </if>
             <if test="name!=null and name!=''">
                 NAME,
             </if>
@@ -57,7 +63,46 @@
                 CLASS_NAME,
             </if>
             <if test="college!=null and college!=''">
-                COLLEGE
+                COLLEGE,
+            </if>
+            <if test="managerId!=null and managerId!=''">
+                MANAGER_ID,
+            </if>
+            <if test="createTime!=null">
+                CREATE_TIME,
+            </if>
+            <if test="updateTime!=null">
+                UPDATE_TIME,
+            </if>
+            <if test="domicile!=null and domicile!=''">
+                DOMICILE,
+            </if>
+            <if test="sex!=null and sex!=''">
+                SEX,
+            </if>
+            <if test="cognition!=null and cognition!=''">
+                COGNITION,
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                TELEPHONE,
+            </if>
+            <if test="idCardNum!=null and idCardNum!=''">
+                ID_CARD_NUM,
+            </if>
+            <if test="birthTime!=null">
+                BIRTH_TIME,
+            </if>
+            <if test="fatherTel!=null and fatherTel!=''">
+                FATHER_TEL,
+            </if>
+            <if test="motherTel!=null and motherTel!=''">
+                MOTHER_TEL,
+            </if>
+            <if test="politicalStatus!=null and politicalStatus!=''">
+                POLITICAL_STATUS,
+            </if>
+            <if test="age!=null and age!=''">
+                AGE
             </if>
         </trim>
         VALUES
@@ -68,6 +113,12 @@
             <if test="userId!=null and userId!=''">
                 #{userId},
             </if>
+            <if test="roleId!=null and roleId!=''">
+                #{roleId},
+            </if>
+            <if test="studentId!=null and studentId!=''">
+                #{studentId},
+            </if>
             <if test="name!=null and name!=''">
                 #{name},
             </if>
@@ -75,7 +126,154 @@
                 #{className},
             </if>
             <if test="college!=null and college!=''">
-                #{college}
+                #{college},
+            </if>
+            <if test="managerId!=null and managerId!=''">
+                #{managerId},
+            </if>
+            <if test="createTime!=null">
+                #{createTime},
+            </if>
+            <if test="updateTime!=null">
+                #{updateTime},
+            </if>
+            <if test="domicile!=null and domicile!=''">
+                #{domicile},
+            </if>
+            <if test="sex!=null and sex!=''">
+                #{sex},
+            </if>
+            <if test="cognition!=null and cognition!=''">
+                #{cognition},
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                #{telephone},
+            </if>
+            <if test="idCardNum!=null and idCardNum!=''">
+                #{idCardNum},
+            </if>
+            <if test="birthTime!=null">
+                #{birthTime},
+            </if>
+            <if test="fatherTel!=null and fatherTel!=''">
+                #{fatherTel},
+            </if>
+            <if test="motherTel!=null and motherTel!=''">
+                #{motherTel},
+            </if>
+            <if test="politicalStatus!=null and politicalStatus!=''">
+                #{politicalStatus},
+            </if>
+            <if test="age!=null and age!=''">
+                #{age}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="EditStudentInfo" parameterType="com.codesniper.smartcampus.entity.UserInfo">
+        UPDATE T_USER_INFO
+        SET NAME=#{name},
+            SEX=#{sex},
+            STUDENT_ID=#{studentId},
+            CLASS_NAME=#{className},
+            COLLEGE=#{college},
+            TELEPHONE=#{telephone},
+            ID_CARD_NUM=#{idCardNum},
+            DOMICILE=#{domicile},
+            BIRTH_TIME=#{birthTime},
+            FATHER_TEL=#{fatherTel},
+            MOTHER_TEL=#{motherTel},
+            POLITICAL_STATUS=#{politicalStatus},
+            AGE=#{age},
+            COGNITION=#{cognition},
+            UPDATE_TIME=#{updateTime}
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <delete id="deleteStudentInfo" parameterType="java.util.Arrays">
+        DELETE FROM T_USER_INFO WHERE USER_ID IN
+        <foreach collection="array" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteMenuRole" parameterType="java.util.Arrays">
+        DELETE FROM T_MENU_ROLE WHERE USER_ID IN
+        <foreach collection="array" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteUser" parameterType="java.util.Arrays">
+        DELETE FROM T_USER WHERE USER_ID IN
+        <foreach collection="array" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteUserRole" parameterType="java.util.Arrays">
+        DELETE FROM T_USER_ROLE WHERE USER_ID IN
+        <foreach collection="array" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="addUserRole" parameterType="com.codesniper.smartcampus.dto.UserRoleDto">
+        INSERT INTO T_USER_ROLE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                ID,
+            </if>
+            <if test="userId!=null and userId!=''">
+                USER_ID,
+            </if>
+            <if test="roleId!=null and roleId!=''">
+                ROLE_ID
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                #{id},
+            </if>
+            <if test="userId!=null and userId!=''">
+                #{userId},
+            </if>
+            <if test="roleId!=null and roleId!=''">
+                #{roleId}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="addMenusForUser" parameterType="com.codesniper.smartcampus.dto.UserMenu">
+        INSERT INTO T_MENU_ROLE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                ID,
+            </if>
+            <if test="menuId!=null and menuId!=''">
+                MENU_ID,
+            </if>
+            <if test="roleId!=null and roleId!=''">
+                ROLE_ID,
+            </if>
+            <if test="userId!=null and userId!=''">
+                USER_ID
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                #{id},
+            </if>
+            <if test="menuId!=null and menuId!=''">
+                #{menuId},
+            </if>
+            <if test="roleId!=null and roleId!=''">
+                #{roleId},
+            </if>
+            <if test="userId!=null and userId!=''">
+                #{userId}
             </if>
         </trim>
     </insert>

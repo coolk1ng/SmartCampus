@@ -15,5 +15,52 @@
           AND USERNAME = #{username}
     </select>
 
+    <insert id="addUserInfo" parameterType="com.codesniper.smartcampus.entity.User">
+        INSERT INTO T_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                ID,
+            </if>
+            <if test="userId!=null and userId!=''">
+                USER_ID,
+            </if>
+            <if test="username!=null and username!=''">
+                USERNAME,
+            </if>
+            <if test="password!=null and password!=''">
+                PASSWORD,
+            </if>
+            <if test="enabled!=null and enabled!=''">
+                ENABLED
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                #{id},
+            </if>
+            <if test="userId!=null and userId!=''">
+                #{userId},
+            </if>
+            <if test="username!=null and username!=''">
+                #{username},
+            </if>
+            <if test="password!=null and password!=''">
+                #{password},
+            </if>
+            <if test="enabled!=null and enabled!=''">
+                #{enabled}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="editUserInfo" parameterType="com.codesniper.smartcampus.entity.User">
+        UPDATE T_USER
+        SET USERNAME=#{username},
+            PASSWORD=#{password},
+            ENABLED=#{enabled}
+        WHERE USER_ID = #{userId}
+    </update>
+
 </mapper>
 
