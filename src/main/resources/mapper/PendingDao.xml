@@ -10,16 +10,16 @@
         <if test="name!=null and name!=''">
             AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
         </if>
-        <if test="leaveTime!=null and leaveTime!=''">
-            AND LEAVE_TIME <![CDATA[<= ]]> #{leaveTime}
+        <if test="leaveTime!=null">
+            AND LEAVE_TIME <![CDATA[>= ]]> #{leaveTime}
         </if>
-        <if test="returnTime!=null and returnTime!=''">
-            AND RETURN_TIME <![CDATA[>= ]]> #{returnTime}
+        <if test="returnTime!=null">
+            AND RETURN_TIME <![CDATA[<= ]]> #{returnTime}
         </if>
     </select>
 
     <update id="approveApplication" parameterType="com.codesniper.smartcampus.dto.PendingReq">
-        UPDATE T_APPLY_INFO SET APPLY_STATE =#{applyState}
+        UPDATE T_APPLY_INFO SET APPLY_STATE =#{applyState} WHERE USER_ID=#{userId}
     </update>
 
     <insert id="insertApprovalRecord" parameterType="com.codesniper.smartcampus.dto.PendingReq">
@@ -40,23 +40,23 @@
             <if test="approvalResult!=null and approvalResult!=''">
                 APPROVAL_RESULT,
             </if>
-            <if test="approvalTime!=null and approvalTime!=''">
+            <if test="approvalTime!=null">
                 APPROVAL_TIME,
             </if>
             <if test="approvalReason!=null and approvalReason!=''">
                 APPROVAL_REASON,
             </if>
-            <if test="createTime!=null createTime!=''">
+            <if test="createTime!=null">
                 CREATE_TIME,
             </if>
-            <if test="updateTime!=null and updateTime!=''">
+            <if test="updateTime!=null">
                 UPDATE_TIME
             </if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id!=null and id!=''">
-                #{id}
+                #{id},
             </if>
             <if test="userId!=null and userId!=''">
                 #{userId},
@@ -70,16 +70,16 @@
             <if test="approvalResult!=null and approvalResult!=''">
                 #{approvalResult},
             </if>
-            <if test="approvalTime!=null and approvalTime!=''">
+            <if test="approvalTime!=null">
                 #{approvalTime},
             </if>
             <if test="approvalReason!=null and approvalReason!=''">
                 #{approvalReason},
             </if>
-            <if test="createTime!=null createTime!=''">
+            <if test="createTime!=null">
                 #{createTime},
             </if>
-            <if test="updateTime!=null and updateTime!=''">
+            <if test="updateTime!=null">
                 #{updateTime}
             </if>
         </trim>

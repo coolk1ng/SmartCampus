@@ -28,7 +28,11 @@ public class ApplyInfo implements Serializable {
     /**
      * 申请原因
      */     
-    private String applyReason; 
+    private String applyReason;
+    /**
+     * 姓名
+     */
+    private String name;
     /**
      * 离校时间
      */

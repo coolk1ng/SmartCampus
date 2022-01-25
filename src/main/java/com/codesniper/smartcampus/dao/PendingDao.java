@@ -25,11 +25,11 @@ public interface PendingDao {
     List <ApplyInfo> getPendingList(PendingReq dto);
 
     /**
-     * 批准,驳回申请
-     * @param applyState
-     * @return Integer
+     * 批准,驳回
+     * @param dto
+     * @return void
      */
-    void approveApplication(String applyState);
+    void approveApplication(PendingReq dto);
 
     /**
      * 插入到审批记录表

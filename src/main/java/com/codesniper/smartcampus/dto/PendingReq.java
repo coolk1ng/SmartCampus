@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -19,6 +20,8 @@ import java.util.Date;
 @ApiModel(value = "待审批查询参数")
 public class PendingReq extends PageParams{
 
+    private String id;
+
     private String userId;
 
     /**
@@ -31,12 +34,14 @@ public class PendingReq extends PageParams{
      * 离校时间
      */
     @ApiModelProperty(value = "离校时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date leaveTime;
 
     /**
      * 返校时间
      */
     @ApiModelProperty(value = "返校时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date returnTime;
 
     /**
@@ -62,6 +67,7 @@ public class PendingReq extends PageParams{
     /**
      * 审批时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date approvalTime;
 
     /**
@@ -72,10 +78,12 @@ public class PendingReq extends PageParams{
     /**
      * 创建时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
     /**
      * 更新时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updateTime;
 }

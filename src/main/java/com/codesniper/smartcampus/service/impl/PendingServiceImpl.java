@@ -11,8 +11,10 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * 待审批ServiceImpl
@@ -35,14 +37,17 @@ public class PendingServiceImpl implements PendingService {
     }
 
     @Override
+    @Transactional
     public void approveApplication(PendingReq dto) {
         String managerId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+        dto.setId(UUID.randomUUID().toString().replaceAll("-",""));
         dto.setApprovalPerson(managerId);
         dto.setCreateTime(new Date());
         dto.setUpdateTime(new Date());
         dto.setApprovalTime(new Date());
+        dto.setApplyState("0");
         //设置申请状态
-        pendingDao.approveApplication(dto.getApplyState());
+        pendingDao.approveApplication(dto);
         //插入到审批记录表中
         pendingDao.insertApprovalRecord(dto);
     }
