@@ -25,11 +25,8 @@
         <if test="name!=null and name!=''">
             AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
         </if>
-        <if test="leaveTime!=null">
-            AND LEAVE_TIME <![CDATA[<=]]> #{leaveTime}
-        </if>
-        <if test="returnTime!=null">
-            AND RETURN_TIME <![CDATA[>=]]> #{returnTime}
+        <if test="applyTime!=null">
+            AND APPLY_TIME =#{applyTime}
         </if>
     </select>
 

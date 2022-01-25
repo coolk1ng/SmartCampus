@@ -89,7 +89,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             userInfoDao.addUserRole(userRole);
 
             //插入角色菜单表
-            String[] menus ={"1","2","5","98","99"};
+            String[] menus ={"1","2","5","98","99","6"};
             UserMenu userMenu = new UserMenu();
             userMenu.setRoleId("1");
             userMenu.setUserId(user.getUserId());

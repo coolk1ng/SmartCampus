@@ -2,8 +2,11 @@ package com.codesniper.smartcampus.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import jdk.jfr.Timespan;
+import jdk.jfr.Timestamp;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -39,4 +42,11 @@ public class ApplyRecordReq extends PageParams{
      */
     @ApiModelProperty(value = "返校时间")
     private Date returnTime;
+
+    /**
+     * 申请时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @ApiModelProperty(value = "申请时间")
+    private Date applyTime;
 }
