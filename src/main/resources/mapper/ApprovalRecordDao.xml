@@ -37,7 +37,7 @@
     <select id="queryByUserId" resultType="com.codesniper.smartcampus.entity.ApprovalRecord">
         SELECT *
         FROM T_APPROVAL_RECORD
-        WHERE USER_ID = #{userId}
+        WHERE ID = #{id}
     </select>
 
     <update id="editApprovalRecord" parameterType="com.codesniper.smartcampus.entity.ApprovalRecord">

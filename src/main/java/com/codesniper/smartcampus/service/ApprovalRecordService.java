@@ -22,10 +22,10 @@ public interface ApprovalRecordService {
 
     /**
      * 查询详情
-     * @param userId
+     * @param id
      * @return ApprovalRecord
      */
-    ApprovalRecord getDetail(String userId);
+    ApprovalRecord getDetail(String id);
 
     /**
      * 编辑审批记录

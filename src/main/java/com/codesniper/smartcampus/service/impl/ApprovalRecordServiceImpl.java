@@ -37,8 +37,8 @@ public class ApprovalRecordServiceImpl implements ApprovalRecordService {
     }
 
     @Override
-    public ApprovalRecord getDetail(String userId) {
-        return approvalRecordDao.queryByUserId(userId);
+    public ApprovalRecord getDetail(String id) {
+        return approvalRecordDao.queryByUserId(id);
     }
 
     @Override

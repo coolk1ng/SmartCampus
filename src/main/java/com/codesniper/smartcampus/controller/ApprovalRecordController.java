@@ -40,9 +40,9 @@ public class ApprovalRecordController {
 
     @PostMapping(value = "/getApprovalRecordDetail")
     @ApiOperation(value = "查询审批记录详情")
-    public ResResult getApprovalRecordDetail(String userId){
-        logger.info("此条记录的用户Id:{}",userId);
-        return ResResult.success(approvalRecordService.getDetail(userId));
+    public ResResult getApprovalRecordDetail(String id){
+        logger.info("此条记录的用户Id:{}",id);
+        return ResResult.success(approvalRecordService.getDetail(id));
     }
 
     @PostMapping(value = "/editApprovalRecord")

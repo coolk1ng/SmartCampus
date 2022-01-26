@@ -23,10 +23,10 @@ public interface ApprovalRecordDao {
 
     /**
      * 根据userId查询
-     * @param userId
+     * @param id
      * @return ApprovalRecord
      */
-    ApprovalRecord queryByUserId(String userId);
+    ApprovalRecord queryByUserId(String id);
 
     /**
      * 编辑审批记录

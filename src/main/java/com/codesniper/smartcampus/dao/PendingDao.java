@@ -40,8 +40,8 @@ public interface PendingDao {
 
     /**
      * 根据id查询
-     * @param userId
+     * @param id
      * @return ApplyInfo
      */
-    ApplyInfo queryByUserId(String userId);
+    ApplyInfo queryByUserId(String id);
 }

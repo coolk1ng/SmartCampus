@@ -2,8 +2,6 @@ package com.codesniper.smartcampus.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import jdk.jfr.Timespan;
-import jdk.jfr.Timestamp;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
