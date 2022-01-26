@@ -9,8 +9,9 @@
     </resultMap>
 
     <select id="getUserInfoByUsername" resultType="com.codesniper.smartcampus.entity.User">
-        SELECT ID, USER_ID, USERNAME, PASSWORD, ENABLED
-        FROM T_USER
+        SELECT a.ID, a.USER_ID, b.NAME,b.STUDENT_ID,USERNAME, PASSWORD, ENABLED
+        FROM T_USER a
+                 LEFT JOIN T_USER_INFO b ON a.USER_ID = b.USER_ID
         WHERE ENABLED = true
           AND USERNAME = #{username}
     </select>
@@ -62,5 +63,43 @@
         WHERE USER_ID = #{userId}
     </update>
 
+    <select id="getPersonalInfo" resultType="com.codesniper.smartcampus.entity.UserInfo">
+        SELECT a.USERNAME, a.PASSWORD, b.*
+        FROM T_USER a
+                 LEFT JOIN T_USER_INFO b ON a.USER_ID = b.USER_ID
+        WHERE a.USER_ID = #{userId}
+    </select>
+
+    <update id="updateUser" parameterType="com.codesniper.smartcampus.entity.User">
+        UPDATE T_USER
+        SET USERNAME=#{username},
+            PASSWORD=#{password}
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <update id="updateUserInfo" parameterType="com.codesniper.smartcampus.entity.UserInfo">
+        UPDATE T_USER_INFO
+        SET STUDENT_ID=#{studentId},
+            NAME=#{name},
+            SEX=#{sex},
+            ID_CARD_NUM=#{idCardNum},
+            CLASS_NAME=#{className},
+            DOMICILE=#{domicile},
+            BIRTH_TIME=#{birthTime},
+            FATHER_TEL=#{fatherTel},
+            MOTHER_TEL=#{motherTel},
+            POLITICAL_STATUS=#{politicalStatus},
+            AGE=#{age},
+            COGNITION=#{cognition},
+            TELEPHONE=#{telephone},
+            COLLEGE=#{college},
+            UPDATE_TIME=#{updateTime},
+            CLAN=#{clan},
+            PROFESSIONAL=#{professional},
+            ENTER_TIME=#{enterTime},
+            REMARK=#{remark},
+            CURRENT_ADDRESS=#{currentAddress}
+        WHERE USER_ID =#{userId}
+    </update>
 </mapper>
 

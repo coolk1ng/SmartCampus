@@ -3,6 +3,7 @@ package com.codesniper.smartcampus.dao;
 import com.codesniper.smartcampus.dto.StudentManageReq;
 import com.codesniper.smartcampus.dto.UserMenu;
 import com.codesniper.smartcampus.dto.UserRoleDto;
+import com.codesniper.smartcampus.entity.User;
 import com.codesniper.smartcampus.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 

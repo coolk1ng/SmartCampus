@@ -1,6 +1,7 @@
 package com.codesniper.smartcampus.dao;
 
 import com.codesniper.smartcampus.entity.User;
+import com.codesniper.smartcampus.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -32,6 +33,27 @@ public interface UserDao {
      * @return void
      */
     void editUserInfo(User dto);
+
+    /**
+     * 根据userId查询个人信息
+     * @param userId
+     * @return UserInfo
+     */
+    UserInfo getPersonalInfo(String userId);
+
+    /**
+     * 编辑user表信息
+     * @param dto
+     * @return void
+     */
+    void updateUser(User dto);
+
+    /**
+     * 编辑userinfo
+     * @param dto
+     * @return void
+     */
+    void updateUserInfo(UserInfo dto);
 
 }
 

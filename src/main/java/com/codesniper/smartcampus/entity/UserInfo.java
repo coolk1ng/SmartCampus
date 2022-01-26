@@ -102,25 +102,30 @@ public class UserInfo implements Serializable {
     /**
      * 班级
      */     
-    private String className; 
+    private String className;
+    /**
+     * 名族
+     */
+    private String clan;
+    /**
+     * 入学时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date enterTime;
+    /**
+     * 专业
+     */
+    private String professional;
+    /**
+     * 备注
+     */
+    private String remark;
 
+    private String userName;
 
+    private String password;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private String currentAddress;
 }
 

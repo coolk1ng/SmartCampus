@@ -1,21 +1,26 @@
 package com.codesniper.smartcampus.service.impl;
 
 import com.codesniper.smartcampus.base.ResResult;
+import com.codesniper.smartcampus.config.RedisConfig;
 import com.codesniper.smartcampus.config.security.JwtTokenUtil;
 import com.codesniper.smartcampus.entity.User;
 import com.codesniper.smartcampus.dao.UserDao;
+import com.codesniper.smartcampus.entity.UserInfo;
 import com.codesniper.smartcampus.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -37,6 +42,8 @@ public class UserServiceImpl implements UserService {
     private JwtTokenUtil jwtTokenUtil;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
 
     @Override
     public ResResult login(String username, String password, String code, HttpServletRequest httpServletRequest) {
@@ -68,6 +75,38 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserInfoByUsername(String username) {
         return userDao.getUserInfoByUsername(username);
+    }
+
+    @Override
+    public UserInfo getPersonalInfo(String userId) {
+        String id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+        UserInfo personalInfo = userDao.getPersonalInfo(id);
+        personalInfo.setPassword("********");
+        return personalInfo;
+    }
+
+    @Override
+    @Transactional
+    public ResResult updatePersonalInfo(UserInfo dto) {
+        String redisKey = "menu_";
+        if (StringUtils.isBlank(dto.getUserId())){
+            return ResResult.fail("不存在的用户");
+        }
+        User user = new User();
+        user.setUserId(dto.getUserId());
+        user.setUsername(dto.getUserName());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setName(dto.getName());
+        //编辑User表
+        userDao.updateUser(user);
+
+        //编辑UserInfo表
+        dto.setUpdateTime(new Date());
+        userDao.updateUserInfo(dto);
+
+        //删除redis中的key
+        redisTemplate.delete(redisKey + dto.getUserId());
+        return ResResult.success("编辑成功");
     }
 
 }

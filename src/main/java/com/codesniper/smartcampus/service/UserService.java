@@ -2,6 +2,7 @@ package com.codesniper.smartcampus.service;
 
 import com.codesniper.smartcampus.base.ResResult;
 import com.codesniper.smartcampus.entity.User;
+import com.codesniper.smartcampus.entity.UserInfo;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,4 +30,18 @@ public interface UserService {
      * @return User
      */
     User getUserInfoByUsername(String username);
+
+    /**
+     * 根据userId查询个人信息
+     * @param userId
+     * @return UserInfo
+     */
+    UserInfo getPersonalInfo(String userId);
+
+    /**
+     * 编辑个人信息
+     * @param dto
+     * @return void
+     */
+    ResResult updatePersonalInfo(UserInfo dto);
 }

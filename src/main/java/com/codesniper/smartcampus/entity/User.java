@@ -39,6 +39,9 @@ public class User implements Serializable, UserDetails {
      */
     private boolean enabled;
 
+    private String name;
+
+    private String studentId;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
