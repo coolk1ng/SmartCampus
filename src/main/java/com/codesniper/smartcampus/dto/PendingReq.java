@@ -24,6 +24,8 @@ public class PendingReq extends PageParams{
 
     private String userId;
 
+    private String applyNo;
+
     /**
      * 名称
      */

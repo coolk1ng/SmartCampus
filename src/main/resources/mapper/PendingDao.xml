@@ -3,7 +3,7 @@
 <mapper namespace="com.codesniper.smartcampus.dao.PendingDao">
 
     <select id="getPendingList" resultType="com.codesniper.smartcampus.entity.ApplyInfo" parameterType="com.codesniper.smartcampus.dto.PendingReq">
-        SELECT USER_ID, NAME, LEAVE_TIME, RETURN_TIME, DAYS
+        SELECT USER_ID, NAME, LEAVE_TIME, RETURN_TIME, DAYS,APPLY_NO
         FROM T_APPLY_INFO
         WHERE MANAGER_ID = #{managerId}
         AND APPLY_STATE = '1'
@@ -19,7 +19,7 @@
     </select>
 
     <update id="approveApplication" parameterType="com.codesniper.smartcampus.dto.PendingReq">
-        UPDATE T_APPLY_INFO SET APPLY_STATE =#{applyState} WHERE USER_ID=#{userId}
+        UPDATE T_APPLY_INFO SET APPLY_STATE =#{applyState} WHERE APPLY_NO=#{applyNo}
     </update>
 
     <insert id="insertApprovalRecord" parameterType="com.codesniper.smartcampus.dto.PendingReq">
@@ -30,6 +30,9 @@
             </if>
             <if test="userId!=null and userId!=''">
                 USER_ID,
+            </if>
+            <if test="applyNo!=null and applyNo!=''">
+                APPLY_NO,
             </if>
             <if test="name!=null and name!=''">
                 NAME,
@@ -60,6 +63,9 @@
             </if>
             <if test="userId!=null and userId!=''">
                 #{userId},
+            </if>
+            <if test="applyNo!=null and applyNo!=''">
+                #{applyNo},
             </if>
             <if test="name!=null and name!=''">
                 #{name},

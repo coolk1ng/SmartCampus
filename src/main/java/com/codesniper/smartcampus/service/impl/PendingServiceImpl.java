@@ -1,6 +1,7 @@
 package com.codesniper.smartcampus.service.impl;
 
 
+import com.codesniper.smartcampus.dao.ApplyInfoDao;
 import com.codesniper.smartcampus.dao.PendingDao;
 import com.codesniper.smartcampus.dto.PendingReq;
 import com.codesniper.smartcampus.entity.ApplyInfo;
@@ -45,8 +46,9 @@ public class PendingServiceImpl implements PendingService {
         dto.setCreateTime(new Date());
         dto.setUpdateTime(new Date());
         dto.setApprovalTime(new Date());
+        //设置申请状态-已审批
         dto.setApplyState("0");
-        //设置申请状态
+        //设置proNo
         pendingDao.approveApplication(dto);
         //插入到审批记录表中
         pendingDao.insertApprovalRecord(dto);
