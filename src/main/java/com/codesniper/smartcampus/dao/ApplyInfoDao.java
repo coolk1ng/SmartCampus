@@ -29,5 +29,12 @@ public interface ApplyInfoDao {
      */
     ApplyInfo getApplyRecordDetail(String id);
 
+    /**
+     * 用户申请
+     * @param dto
+     * @return void
+     */
+    void InsertToApplication(ApplyInfo dto);
+
 }
 

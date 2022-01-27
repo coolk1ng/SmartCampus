@@ -36,5 +36,116 @@
         WHERE ID = #{id}
     </select>
 
+    <insert id="InsertToApplication" parameterType="com.codesniper.smartcampus.entity.ApplyInfo">
+        INSERT INTO T_APPLY_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                ID,
+            </if>
+            <if test="userId!=null and userId!=''">
+                USER_ID,
+            </if>
+            <if test="applyNo!=null and applyNo!=''">
+                APPLY_NO,
+            </if>
+            <if test="leaveTime!=null">
+                LEAVE_TIME,
+            </if>
+            <if test="returnTime!=null">
+                RETURN_TIME,
+            </if>
+            <if test="days!=null and days!=''">
+                DAYS,
+            </if>
+            <if test="homeAddress!=null and homeAddress!=''">
+                HOME_ADDRESS,
+            </if>
+            <if test="guardianTel!=null and guardianTel!=''">
+                GUARDIAN_TEL,
+            </if>
+            <if test="trafficType!=null and trafficType!=''">
+                TRAFFIC_TYPE,
+            </if>
+            <if test="trafficNum!=null and trafficNum!=''">
+                TRAFFIC_NUM,
+            </if>
+            <if test="managerId!=null and managerId!=''">
+                MANAGER_ID,
+            </if>
+            <if test="applyState!=null and applyState!=''">
+                APPLY_STATE,
+            </if>
+            <if test="applyReason!=null and applyReason!=''">
+                APPLY_REASON,
+            </if>
+            <if test="name!=null and name!=''">
+                NAME,
+            </if>
+            <if test="applyTime!=null">
+                APPLY_TIME,
+            </if>
+            <if test="createTime!=null">
+                CREATE_TIME,
+            </if>
+            <if test="updateTime!=null">
+                UPDATE_TIME
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                #{id},
+            </if>
+            <if test="userId!=null and userId!=''">
+                #{userId},
+            </if>
+            <if test="applyNo!=null and applyNo!=''">
+                #{applyNo},
+            </if>
+            <if test="leaveTime!=null">
+                #{leaveTime},
+            </if>
+            <if test="returnTime!=null">
+                #{returnTime},
+            </if>
+            <if test="days!=null and days!=''">
+                #{days},
+            </if>
+            <if test="homeAddress!=null and homeAddress!=''">
+                #{homeAddress},
+            </if>
+            <if test="guardianTel!=null and guardianTel!=''">
+                #{guardianTel},
+            </if>
+            <if test="trafficType!=null and trafficType!=''">
+                #{trafficType},
+            </if>
+            <if test="trafficNum!=null and trafficNum!=''">
+                #{trafficNum},
+            </if>
+            <if test="managerId!=null and managerId!=''">
+                #{managerId},
+            </if>
+            <if test="applyState!=null and applyState!=''">
+                #{applyState},
+            </if>
+            <if test="applyReason!=null and applyReason!=''">
+                #{applyReason},
+            </if>
+            <if test="name!=null and name!=''">
+                #{name},
+            </if>
+            <if test="applyTime!=null">
+                #{applyTime},
+            </if>
+            <if test="createTime!=null">
+                #{createTime},
+            </if>
+            <if test="updateTime!=null">
+                #{updateTime}
+            </if>
+        </trim>
+    </insert>
+
 </mapper>
 

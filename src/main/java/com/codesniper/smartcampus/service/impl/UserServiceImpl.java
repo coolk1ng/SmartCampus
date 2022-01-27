@@ -81,7 +81,6 @@ public class UserServiceImpl implements UserService {
     public UserInfo getPersonalInfo(String userId) {
         String id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
         UserInfo personalInfo = userDao.getPersonalInfo(id);
-        personalInfo.setPassword("********");
         return personalInfo;
     }
 

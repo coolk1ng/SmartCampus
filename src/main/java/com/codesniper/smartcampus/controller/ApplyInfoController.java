@@ -3,9 +3,11 @@ package com.codesniper.smartcampus.controller;
 import com.alibaba.fastjson.JSON;
 import com.codesniper.smartcampus.base.ResResult;
 import com.codesniper.smartcampus.dto.ApplyRecordReq;
+import com.codesniper.smartcampus.entity.ApplyInfo;
 import com.codesniper.smartcampus.service.ApplyInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +46,12 @@ public class ApplyInfoController {
         return ResResult.success(applyInfoService.getApplyRecordDetail(id));
     }
 
+    @PostMapping(value = "/doApplication")
+    @ApiOperation(value = "用户申请")
+    public ResResult doApplication(ApplyInfo dto){
+        logger.info("申请信息参数:{}",JSON.toJSONString(dto));
+        applyInfoService.InsertToApplication(dto);
+        return ResResult.success("申请成功");
+    }
 }
 
