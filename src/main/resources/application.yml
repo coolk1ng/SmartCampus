@@ -22,7 +22,7 @@ spring:
       # 从连接池返回的连接自动提交
       auto-commit: true
       # 连接最大存活时间,0表示永久存活,默认30min
-      max-lifetime: 1800000
+      max-lifetime: 18000
       # 连接超时时间,默认30s
       connection-timeout: 30000
       # 测试连接是否可用的查询语句
@@ -39,7 +39,10 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
-    timeout: 10000
+    timeout: 1000
+    lettuce:
+      pool:
+        max-wait: -1
 # mybatis配置
 mybatis:
   configuration:

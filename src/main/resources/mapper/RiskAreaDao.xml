@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codesniper.smartcampus.dao.RiskAreaDao">
+
+    <resultMap type="com.codesniper.smartcampus.entity.RiskArea" id="RiskAreaMap">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="area" column="AREA" jdbcType="VARCHAR"/>
+        <result property="areaCode" column="AREA_CODE" jdbcType="VARCHAR"/>
+        <result property="riskLevel" column="RISK_LEVEL" jdbcType="VARCHAR"/>
+        <result property="remark" column="REMARK" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getRiskAreaList" resultType="com.codesniper.smartcampus.entity.RiskArea" parameterType="com.codesniper.smartcampus.dto.RiskAreaReq">
+        SELECT * FROM T_RISK_AREA
+        <where>
+            <if test="area!=null and area!=''">
+                AND AREA LIKE CONCAT('%',CONCAT(#{area},'%'))
+            </if>
+            <if test="riskLevel!=null and riskLevel!=''">
+                AND RISK_LEVEL=#{riskLevel}
+            </if>
+        </where>
+        ORDER BY UPDATE_TIME DESC
+    </select>
+
+    <select id="queryById" resultType="com.codesniper.smartcampus.entity.RiskArea">
+        SELECT *
+        FROM T_RISK_AREA
+        WHERE ID = #{id}
+    </select>
+
+    <update id="updateRiskArea" parameterType="com.codesniper.smartcampus.entity.RiskArea">
+        UPDATE T_RISK_AREA
+        SET AREA=#{area},
+            AREA_CODE=#{areaCode},
+            RISK_LEVEL=#{riskLevel},
+            UPDATE_TIME=#{updateTime},
+            REMARK=#{remark}
+        WHERE ID = #{id}
+    </update>
+
+</mapper>
+
