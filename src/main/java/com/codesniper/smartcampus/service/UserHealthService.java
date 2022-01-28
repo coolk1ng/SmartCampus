@@ -33,4 +33,10 @@ public interface UserHealthService {
      */
     void updateUserHealth(UserHealth dto);
 
+    /**
+     * 根据managerId查询健康状况列表
+     * @return PageInfo<UserHealth>
+     */
+    PageInfo<UserHealth> getHealthListByManager(UserHealthReq dto);
+
 }

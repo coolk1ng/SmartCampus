@@ -7,7 +7,6 @@ import com.codesniper.smartcampus.entity.ApplyInfo;
 import com.codesniper.smartcampus.service.ApplyInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

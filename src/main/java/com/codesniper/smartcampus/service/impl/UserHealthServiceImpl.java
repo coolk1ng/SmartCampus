@@ -44,4 +44,12 @@ public class UserHealthServiceImpl implements UserHealthService {
         dto.setUpdateTime(new Date());
         userHealthDao.updateUserHealth(dto);
     }
+
+    @Override
+    public PageInfo<UserHealth> getHealthListByManager(UserHealthReq dto) {
+        PageHelper.startPage(dto.getPageNum()==null ? 1 :dto.getPageNum(),dto.getPageSize()==null ? 10:dto.getPageSize());
+        String managerId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+        dto.setManagerId(managerId);
+        return new PageInfo<>(userHealthDao.getHealthListByManager(dto));
+    }
 }

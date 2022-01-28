@@ -50,5 +50,12 @@ public class UserHealthController {
         userHealthService.updateUserHealth(dto);
         return ResResult.success("编辑成功");
     }
+
+    @PostMapping(value = "/getHealthListByManager")
+    @ApiOperation(value = "管理员查看学生健康状况")
+    public ResResult getHealthListByManager(UserHealthReq dto){
+        logger.info("管理员查询学生状况参数:{}",JSON.toJSONString(dto));
+        return ResResult.success(userHealthService.getHealthListByManager(dto));
+    }
 }
 

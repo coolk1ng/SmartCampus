@@ -37,5 +37,11 @@ public interface UserHealthDao {
      */
     void updateUserHealth(UserHealth dto);
 
+    /**
+     * 根据managerId查询健康状况列表
+     * @param dto
+     * @return List<UserHealth>
+     */
+    List<UserHealth> getHealthListByManager(UserHealthReq dto);
 }
 

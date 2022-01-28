@@ -19,6 +19,8 @@ public class UserHealthReq extends PageParams{
 
     private String id;
 
+    private String name;
+
     private String userId;
 
     private String isFever;
@@ -28,5 +30,7 @@ public class UserHealthReq extends PageParams{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
+
+    private String managerId;
 
 }
