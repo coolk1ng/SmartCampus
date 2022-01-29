@@ -1,5 +1,6 @@
 package com.codesniper.smartcampus.service.impl;
 
+import com.codesniper.smartcampus.config.DicConfig;
 import com.codesniper.smartcampus.dto.UserHealthReq;
 import com.codesniper.smartcampus.entity.User;
 import com.codesniper.smartcampus.entity.UserHealth;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -31,12 +33,25 @@ public class UserHealthServiceImpl implements UserHealthService {
         PageHelper.startPage(dto.getPageNum()==null ? 1 :dto.getPageNum(),dto.getPageSize()==null ? 10:dto.getPageSize());
         String userId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
         dto.setUserId(userId);
-        return new PageInfo<>(userHealthDao.getUserHealthList(dto));
+        List<UserHealth> list = userHealthDao.getUserHealthList(dto);
+        //映射字典值
+        for (UserHealth item : list) {
+            item.setIsFever(DicConfig.YES_AND_NO_MAP.get(item.getIsFever()));
+            item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
+            item.setIsContactRisk(DicConfig.YES_AND_NO_MAP.get(item.getIsContactRisk()));
+            item.setIsTrue(DicConfig.YES_AND_NO_MAP.get(item.getIsTrue()));
+        }
+        return new PageInfo<>(list);
     }
 
     @Override
     public UserHealth getUserHealthDetail(String id) {
-        return userHealthDao.getUserHealthDetail(id);
+        UserHealth item = userHealthDao.getUserHealthDetail(id);
+        item.setIsFever(DicConfig.YES_AND_NO_MAP.get(item.getIsFever()));
+        item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
+        item.setIsContactRisk(DicConfig.YES_AND_NO_MAP.get(item.getIsContactRisk()));
+        item.setIsTrue(DicConfig.YES_AND_NO_MAP.get(item.getIsTrue()));
+        return item;
     }
 
     @Override
@@ -50,6 +65,12 @@ public class UserHealthServiceImpl implements UserHealthService {
         PageHelper.startPage(dto.getPageNum()==null ? 1 :dto.getPageNum(),dto.getPageSize()==null ? 10:dto.getPageSize());
         String managerId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
         dto.setManagerId(managerId);
-        return new PageInfo<>(userHealthDao.getHealthListByManager(dto));
+        List<UserHealth> list = userHealthDao.getHealthListByManager(dto);
+        //映射字典值
+        for (UserHealth item : list) {
+            item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
+            item.setIsFever(DicConfig.YES_AND_NO_MAP.get(item.getIsFever()));
+        }
+        return new PageInfo<>(list);
     }
 }

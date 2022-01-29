@@ -1,6 +1,7 @@
 package com.codesniper.smartcampus.service.impl;
 
 import com.codesniper.smartcampus.base.ResResult;
+import com.codesniper.smartcampus.config.DicConfig;
 import com.codesniper.smartcampus.dao.UserDao;
 import com.codesniper.smartcampus.dao.UserInfoDao;
 import com.codesniper.smartcampus.dto.StudentManageReq;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -42,7 +44,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         PageHelper.startPage(dto.getPageNum()==null ? 1 : dto.getPageNum(),dto.getPageSize()==null ? 10 : dto.getPageSize());
         String managerId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
         dto.setManagerId(managerId);
-        return new PageInfo<>(userInfoDao.getStudentList(dto));
+        List<UserInfo> list = userInfoDao.getStudentList(dto);
+        //映射字典值
+        for (UserInfo item : list) {
+            item.setSex(DicConfig.GENDER_MAP.get(item.getSex()));
+        }
+        return new PageInfo<>(list);
     }
 
     @Override
@@ -114,6 +121,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfo getDetail(String userId) {
-        return userInfoDao.queryById(userId);
+        UserInfo userInfo = userInfoDao.queryById(userId);
+        userInfo.setSex(DicConfig.GENDER_MAP.get(userInfo.getSex()));
+        userInfo.setPoliticalStatus(DicConfig.POLITICAL_STATUS_MAP.get(userInfo.getPoliticalStatus()));
+        userInfo.setCognition(DicConfig.JOB_LEVEL_MAP.get(userInfo.getCognition()));
+        return userInfo;
     }
 }
