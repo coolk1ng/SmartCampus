@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class ApprovalRecordServiceImpl implements ApprovalRecordService {
             item.setApprovalPerson(userInfo.getName());
             item.setApprovalResult(DicConfig.APPROVAL_RESULT_MAP.get(item.getApprovalResult()));
         }
-        return new PageInfo<>();
+        return new PageInfo<>(list);
     }
 
     @Override

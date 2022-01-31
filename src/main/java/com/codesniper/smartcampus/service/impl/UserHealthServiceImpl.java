@@ -46,12 +46,7 @@ public class UserHealthServiceImpl implements UserHealthService {
 
     @Override
     public UserHealth getUserHealthDetail(String id) {
-        UserHealth item = userHealthDao.getUserHealthDetail(id);
-        item.setIsFever(DicConfig.YES_AND_NO_MAP.get(item.getIsFever()));
-        item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
-        item.setIsContactRisk(DicConfig.YES_AND_NO_MAP.get(item.getIsContactRisk()));
-        item.setIsTrue(DicConfig.YES_AND_NO_MAP.get(item.getIsTrue()));
-        return item;
+        return userHealthDao.getUserHealthDetail(id);
     }
 
     @Override
@@ -67,10 +62,10 @@ public class UserHealthServiceImpl implements UserHealthService {
         dto.setManagerId(managerId);
         List<UserHealth> list = userHealthDao.getHealthListByManager(dto);
         //映射字典值
-        for (UserHealth item : list) {
+        /*for (UserHealth item : list) {
             item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
             item.setIsFever(DicConfig.YES_AND_NO_MAP.get(item.getIsFever()));
-        }
+        }*/
         return new PageInfo<>(list);
     }
 }

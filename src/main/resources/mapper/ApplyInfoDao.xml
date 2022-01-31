@@ -21,7 +21,7 @@
 
     <select id="getApplyRecordList" resultType="com.codesniper.smartcampus.entity.ApplyInfo" parameterType="com.codesniper.smartcampus.dto.ApplyRecordReq">
         SELECT ID, USER_ID, NAME, APPLY_REASON, APPLY_TIME, DAYS,APPLY_STATE
-        FROM T_APPLY_INFO WHERE USER_ID =#{userId}
+        FROM T_APPLY_INFO a LEFT JOIN T_APPROVAL_RECORD b ON a.APPLY_NO = b.APPLY_NO WHERE USER_ID =#{userId}
         <if test="name!=null and name!=''">
             AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
         </if>
