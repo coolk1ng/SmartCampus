@@ -27,4 +27,11 @@ public interface PendingService {
      * @return ResResult
      */
     void approveApplication(PendingReq dto);
+
+    /**
+     * 查询待审批详情
+     * @param id
+     * @return ApplyInfo
+     */
+    ApplyInfo getPendingDetail(String id);
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.codesniper.smartcampus.dao.PendingDao">
 
     <select id="getPendingList" resultType="com.codesniper.smartcampus.entity.ApplyInfo" parameterType="com.codesniper.smartcampus.dto.PendingReq">
-        SELECT USER_ID, NAME, LEAVE_TIME, RETURN_TIME, DAYS,APPLY_NO
+        SELECT ID, USER_ID, NAME, LEAVE_TIME, RETURN_TIME, DAYS,APPLY_NO
         FROM T_APPLY_INFO
         WHERE MANAGER_ID = #{managerId}
         AND APPLY_STATE = '1'
@@ -92,9 +92,10 @@
     </insert>
 
     <select id="queryByUserId" resultType="com.codesniper.smartcampus.entity.ApplyInfo">
-        SELECT *
-        FROM T_APPLY_INFO
-        WHERE ID = #{id}
+        SELECT a.*, b.TEMPERATURE, b.IS_FEVER, b.IS_CONTACT_RISK, b.HEALTH_CODE_COLOR,b.IS_TRUE
+        FROM T_APPLY_INFO a
+                 LEFT JOIN T_USER_HEALTH b ON a.APPLY_TIME = b.CREATE_TIME
+        WHERE a.ID = #{id}
           AND APPLY_STATE = '1'
     </select>
 </mapper>

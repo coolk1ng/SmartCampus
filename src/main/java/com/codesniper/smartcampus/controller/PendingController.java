@@ -3,7 +3,6 @@ package com.codesniper.smartcampus.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.codesniper.smartcampus.base.ResResult;
-import com.codesniper.smartcampus.dao.PendingDao;
 import com.codesniper.smartcampus.dto.PendingReq;
 import com.codesniper.smartcampus.service.PendingService;
 import io.swagger.annotations.Api;
@@ -44,5 +43,11 @@ public class PendingController {
         logger.info("批准,驳回参数:{}",JSON.toJSONString(dto));
         pendingService.approveApplication(dto);
         return ResResult.success("审批成功");
+    }
+
+    @PostMapping(value = "/getPendingDetail")
+    @ApiOperation(value = "查询详情")
+    public ResResult getPendingDetail(String id){
+        return ResResult.success(pendingService.getPendingDetail(id));
     }
 }

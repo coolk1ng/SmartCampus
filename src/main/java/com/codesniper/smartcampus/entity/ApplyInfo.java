@@ -94,22 +94,31 @@ public class ApplyInfo implements Serializable {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date updateTime; 
+    private Date updateTime;
 
+    /**
+     * 体温
+     */
+    private String temperature;
 
+    /**
+     * 是否发热
+     */
+    private String isFever;
 
+    /**
+     * 是否接触高风险人群
+     */
+    private String isContactRisk;
 
+    /**
+     * 健康码颜色
+     */
+    private String healthCodeColor;
 
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 是否属实
+     */
+    private String isTrue;
 }
 
