@@ -32,7 +32,7 @@ spring:
     database: 0
     host: 110.40.236.91
     port: 6379
-    password: !gongxiwu5.!
+    password: gongxiwu666
     jedis:
       pool:
         max-active: 8

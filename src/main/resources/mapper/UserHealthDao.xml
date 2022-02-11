@@ -18,16 +18,16 @@
     <select id="getUserHealthList" resultType="com.codesniper.smartcampus.entity.UserHealth" parameterType="com.codesniper.smartcampus.dto.UserHealthReq">
         SELECT a.NAME,b.* FROM T_USER_INFO a LEFT JOIN T_USER_HEALTH b ON a.USER_ID = b.USER_ID
         WHERE a.USER_ID=#{userId}
-            <if test="isFever!=null and isFever!=''">
-                AND IS_FEVER =#{isFever}
-            </if>
-            <if test="healthCodeColor!=null and healthCodeColor!=''">
-                AND HEALTH_CODE_COLOR =#{healthCodeColor}
-            </if>
-            <if test="createTime!=null">
-                AND CREATE_TIME =#{createTime}
-            </if>
-            ORDER BY b.CREATE_TIME DESC
+        <if test="isFever!=null and isFever!=''">
+            AND IS_FEVER =#{isFever}
+        </if>
+        <if test="healthCodeColor!=null and healthCodeColor!=''">
+            AND HEALTH_CODE_COLOR =#{healthCodeColor}
+        </if>
+        <if test="createTime!=null">
+            AND b.CREATE_TIME =#{createTime}
+        </if>
+        ORDER BY b.CREATE_TIME DESC
     </select>
 
     <select id="getUserHealthDetail" resultType="com.codesniper.smartcampus.entity.UserHealth">
@@ -48,7 +48,7 @@
         WHERE ID = #{id}
     </update>
 
-    <select id="getHealthListByManager" resultType="com.codesniper.smartcampus.entity.UserHealth">
+    <select id="getHealthListByManager" resultType="com.codesniper.smartcampus.entity.UserHealth" parameterType="com.codesniper.smartcampus.entity.UserHealth">
         SELECT a.NAME, b.*
         FROM T_USER_INFO a
                  LEFT JOIN T_USER_HEALTH b ON a.USER_ID = b.USER_ID
@@ -60,7 +60,7 @@
             AND HEALTH_CODE_COLOR =#{healthCodeColor}
         </if>
         <if test="createTime!=null">
-            AND CREATE_TIME =#{createTime}
+            AND b.CREATE_TIME =#{createTime}
         </if>
     </select>
 </mapper>
