@@ -45,7 +45,7 @@ public class ApprovalRecord implements Serializable {
      * 审批时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date approvalTime; 
     /**
      * 批准或驳回原因
@@ -55,13 +55,13 @@ public class ApprovalRecord implements Serializable {
      * 更新时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date updateTime; 
     /**
      * 创建时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime; 
 
 

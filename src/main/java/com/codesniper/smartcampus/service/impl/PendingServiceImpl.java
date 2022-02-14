@@ -53,4 +53,9 @@ public class PendingServiceImpl implements PendingService {
         //插入到审批记录表中
         pendingDao.insertApprovalRecord(dto);
     }
+
+    @Override
+    public ApplyInfo getPendingDetail(String id) {
+        return pendingDao.queryByUserId(id);
+    }
 }
