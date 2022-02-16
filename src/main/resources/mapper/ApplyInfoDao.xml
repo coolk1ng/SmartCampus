@@ -20,7 +20,7 @@
     </resultMap>
 
     <select id="getApplyRecordList" resultType="com.codesniper.smartcampus.entity.ApplyInfo" parameterType="com.codesniper.smartcampus.dto.ApplyRecordReq">
-        SELECT a.ID, a.USER_ID, a.NAME, APPLY_REASON, APPLY_TIME, DAYS,APPLY_STATE
+        SELECT a.ID, a.USER_ID, a.NAME, APPLY_REASON, APPLY_TIME, DAYS, APPLY_STATE
         FROM T_APPLY_INFO a LEFT JOIN T_APPROVAL_RECORD b ON a.APPLY_NO = b.APPLY_NO WHERE a.USER_ID =#{userId}
         <if test="name!=null and name!=''">
             AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
@@ -31,9 +31,10 @@
     </select>
 
     <select id="getApplyRecordDetail" resultType="com.codesniper.smartcampus.entity.ApplyInfo">
-        SELECT *
-        FROM T_APPLY_INFO
-        WHERE ID = #{id}
+        SELECT a.*,b.APPROVAL_REASON
+        FROM T_APPLY_INFO a
+                 LEFT JOIN T_APPROVAL_RECORD b ON a.APPLY_NO = b.APPLY_NO
+        WHERE a.ID = #{id}
     </select>
 
     <insert id="InsertToApplication" parameterType="com.codesniper.smartcampus.entity.ApplyInfo">

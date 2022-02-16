@@ -1,11 +1,12 @@
 package com.codesniper.smartcampus.entity;
 
-import java.util.Date;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户申请信息表(ApplyInfo)实体类
@@ -120,5 +121,10 @@ public class ApplyInfo implements Serializable {
      * 是否属实
      */
     private String isTrue;
+
+    /**
+     * 审批的原因
+     */
+    private String approvalReason;
 }
 
