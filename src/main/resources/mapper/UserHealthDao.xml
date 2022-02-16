@@ -15,7 +15,8 @@
         <result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <select id="getUserHealthList" resultType="com.codesniper.smartcampus.entity.UserHealth" parameterType="com.codesniper.smartcampus.dto.UserHealthReq">
+    <select id="getUserHealthList" resultType="com.codesniper.smartcampus.entity.UserHealth"
+            parameterType="com.codesniper.smartcampus.dto.UserHealthReq">
         SELECT a.NAME,b.* FROM T_USER_INFO a LEFT JOIN T_USER_HEALTH b ON a.USER_ID = b.USER_ID
         WHERE a.USER_ID=#{userId}
         <if test="isFever!=null and isFever!=''">
@@ -31,8 +32,10 @@
     </select>
 
     <select id="getUserHealthDetail" resultType="com.codesniper.smartcampus.entity.UserHealth">
-        SELECT a.NAME,b.* FROM T_USER_INFO a LEFT JOIN T_USER_HEALTH b ON a.USER_ID = b.USER_ID
-        WHERE b.ID=#{id}
+        SELECT a.NAME, b.*
+        FROM T_USER_INFO a
+                 LEFT JOIN T_USER_HEALTH b ON a.USER_ID = b.USER_ID
+        WHERE b.ID = #{id}
     </select>
 
     <update id="updateUserHealth" parameterType="com.codesniper.smartcampus.entity.UserHealth">
@@ -48,10 +51,11 @@
         WHERE ID = #{id}
     </update>
 
-    <select id="getHealthListByManager" resultType="com.codesniper.smartcampus.entity.UserHealth" parameterType="com.codesniper.smartcampus.entity.UserHealth">
+    <select id="getHealthListByManager" resultType="com.codesniper.smartcampus.entity.UserHealth"
+            parameterType="com.codesniper.smartcampus.entity.UserHealth">
         SELECT a.NAME, b.*
         FROM T_USER_INFO a
-                 LEFT JOIN T_USER_HEALTH b ON a.USER_ID = b.USER_ID
+        LEFT JOIN T_USER_HEALTH b ON a.USER_ID = b.USER_ID
         WHERE a.MANAGER_ID =#{managerId}
         <if test="name!=null and name!=''">
             AND a.NAME=#{name}
@@ -62,6 +66,82 @@
         <if test="createTime!=null">
             AND b.CREATE_TIME =#{createTime}
         </if>
+    </select>
+
+    <insert id="InsertHealthInfo" parameterType="com.codesniper.smartcampus.entity.UserHealth">
+        INSERT INTO T_USER_HEALTH
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                ID,
+            </if>
+            <if test="userId!=null and userId!=''">
+                USER_ID,
+            </if>
+            <if test="temperature!=null and temperature!=''">
+                TEMPERATURE,
+            </if>
+            <if test="isFever!=null and isFever!=''">
+                IS_FEVER,
+            </if>
+            <if test="isContactRisk!=null and isContactRisk!=''">
+                IS_CONTACT_RISK,
+            </if>
+            <if test="healthCodeColor!=null and healthCodeColor!=''">
+                HEALTH_CODE_COLOR,
+            </if>
+            <if test="localToday!=null and localToday!=''">
+                LOCAL_TODAY,
+            </if>
+            <if test="isTrue!=null and isTrue!=''">
+                IS_TRUE,
+            </if>
+            <if test="createTime!=null">
+                CREATE_TIME,
+            </if>
+            <if test="updateTime!=null">
+                UPDATE_TIME
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                #{id},
+            </if>
+            <if test="userId!=null and userId!=''">
+                #{userId},
+            </if>
+            <if test="temperature!=null and temperature!=''">
+                #{temperature},
+            </if>
+            <if test="isFever!=null and isFever!=''">
+                #{isFever},
+            </if>
+            <if test="isContactRisk!=null and isContactRisk!=''">
+                #{isContactRisk},
+            </if>
+            <if test="healthCodeColor!=null and healthCodeColor!=''">
+                #{healthCodeColor},
+            </if>
+            <if test="localToday!=null and localToday!=''">
+                #{localToday},
+            </if>
+            <if test="isTrue!=null and isTrue!=''">
+                #{isTrue},
+            </if>
+            <if test="createTime!=null">
+                #{createTime},
+            </if>
+            <if test="updateTime!=null">
+                #{updateTime}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getHealthInfoToday" resultType="com.codesniper.smartcampus.entity.UserHealth">
+        SELECT *
+        FROM T_USER_HEALTH
+        WHERE USER_ID = #{userId}
+          AND CREATE_TIME = current_date()
     </select>
 </mapper>
 

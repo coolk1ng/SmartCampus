@@ -57,5 +57,13 @@ public class UserHealthController {
         logger.info("管理员查询学生状况参数:{}",JSON.toJSONString(dto));
         return ResResult.success(userHealthService.getHealthListByManager(dto));
     }
+
+    @PostMapping(value = "/insertHealthInfo")
+    @ApiOperation(value = "新增填报信息")
+    public ResResult insertHealthInfo(UserHealth dto){
+        logger.info("新增填报信息参数:{}",JSON.toJSONString(dto));
+        return ResResult.success(userHealthService.InsertHealthInfo(dto));
+    }
+
 }
 

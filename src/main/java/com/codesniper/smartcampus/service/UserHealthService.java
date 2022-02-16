@@ -1,5 +1,6 @@
 package com.codesniper.smartcampus.service;
 
+import com.codesniper.smartcampus.base.ResResult;
 import com.codesniper.smartcampus.dto.UserHealthReq;
 import com.codesniper.smartcampus.entity.UserHealth;
 import com.github.pagehelper.PageInfo;
@@ -38,5 +39,12 @@ public interface UserHealthService {
      * @return PageInfo<UserHealth>
      */
     PageInfo<UserHealth> getHealthListByManager(UserHealthReq dto);
+
+    /**
+     * 新增填报信息
+     * @param dto
+     * @return void
+     */
+    ResResult InsertHealthInfo(UserHealth dto);
 
 }

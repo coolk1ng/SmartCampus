@@ -28,7 +28,7 @@ public class UserHealthReq extends PageParams{
     private String healthCodeColor;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime;
 
     private String managerId;

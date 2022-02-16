@@ -3,23 +3,22 @@
 <mapper namespace="com.codesniper.smartcampus.dao.PendingDao">
 
     <select id="getPendingList" resultType="com.codesniper.smartcampus.entity.ApplyInfo" parameterType="com.codesniper.smartcampus.dto.PendingReq">
-        SELECT ID, USER_ID, NAME, LEAVE_TIME, RETURN_TIME, DAYS,APPLY_NO
+        SELECT ID, USER_ID, NAME, LEAVE_TIME, RETURN_TIME, DAYS, APPLY_NO, APPLY_TIME, APPLY_REASON
         FROM T_APPLY_INFO
         WHERE MANAGER_ID = #{managerId}
         AND APPLY_STATE = '1'
         <if test="name!=null and name!=''">
             AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
         </if>
-        <if test="leaveTime!=null">
-            AND LEAVE_TIME <![CDATA[>= ]]> #{leaveTime}
-        </if>
-        <if test="returnTime!=null">
-            AND RETURN_TIME <![CDATA[<= ]]> #{returnTime}
+        <if test="applyTime!=null">
+            AND APPLY_TIME =#{applyTime}
         </if>
     </select>
 
     <update id="approveApplication" parameterType="com.codesniper.smartcampus.dto.PendingReq">
-        UPDATE T_APPLY_INFO SET APPLY_STATE =#{applyState} WHERE APPLY_NO=#{applyNo}
+        UPDATE T_APPLY_INFO
+        SET APPLY_STATE =#{applyState}
+        WHERE APPLY_NO = #{applyNo}
     </update>
 
     <insert id="insertApprovalRecord" parameterType="com.codesniper.smartcampus.dto.PendingReq">
@@ -92,7 +91,7 @@
     </insert>
 
     <select id="queryByUserId" resultType="com.codesniper.smartcampus.entity.ApplyInfo">
-        SELECT a.*, b.TEMPERATURE, b.IS_FEVER, b.IS_CONTACT_RISK, b.HEALTH_CODE_COLOR,b.IS_TRUE
+        SELECT a.*, b.TEMPERATURE, b.IS_FEVER, b.IS_CONTACT_RISK, b.HEALTH_CODE_COLOR, b.IS_TRUE
         FROM T_APPLY_INFO a
                  LEFT JOIN T_USER_HEALTH b ON a.APPLY_TIME = b.CREATE_TIME
         WHERE a.ID = #{id}

@@ -43,5 +43,19 @@ public interface UserHealthDao {
      * @return List<UserHealth>
      */
     List<UserHealth> getHealthListByManager(UserHealthReq dto);
+
+    /**
+     * 填报健康信息
+     * @param dto
+     * @return void
+     */
+    void InsertHealthInfo(UserHealth dto);
+    
+    /** 
+     * 查询该用户当天的健康信息
+     * @param userId
+     * @return UserHealth
+     */ 
+    UserHealth getHealthInfoToday(String userId);
 }
 

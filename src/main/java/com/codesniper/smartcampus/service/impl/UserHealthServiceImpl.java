@@ -1,5 +1,6 @@
 package com.codesniper.smartcampus.service.impl;
 
+import com.codesniper.smartcampus.base.ResResult;
 import com.codesniper.smartcampus.config.DicConfig;
 import com.codesniper.smartcampus.dto.UserHealthReq;
 import com.codesniper.smartcampus.entity.User;
@@ -11,9 +12,11 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -40,18 +43,25 @@ public class UserHealthServiceImpl implements UserHealthService {
             item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
             item.setIsContactRisk(DicConfig.YES_AND_NO_MAP.get(item.getIsContactRisk()));
             item.setIsTrue(DicConfig.YES_AND_NO_MAP.get(item.getIsTrue()));
+            if (!item.getTemperature().contains("°C")){
+                item.setTemperature(item.getTemperature() + "°C");
+            }
         }
         return new PageInfo<>(list);
     }
 
     @Override
     public UserHealth getUserHealthDetail(String id) {
-        return userHealthDao.getUserHealthDetail(id);
+        UserHealth item = userHealthDao.getUserHealthDetail(id);
+        item.setTemperature(item.getTemperature() + "°C");
+        return item;
     }
 
     @Override
+    @Transactional
     public void updateUserHealth(UserHealth dto) {
         dto.setUpdateTime(new Date());
+        dto.setTemperature(dto.getTemperature().replaceAll("°C",""));
         userHealthDao.updateUserHealth(dto);
     }
 
@@ -68,4 +78,23 @@ public class UserHealthServiceImpl implements UserHealthService {
         }*/
         return new PageInfo<>(list);
     }
+
+    @Override
+    @Transactional
+    public ResResult InsertHealthInfo(UserHealth dto) {
+        String userId = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+        if(null != userHealthDao.getHealthInfoToday(userId)){
+            return ResResult.fail("今日已填报");
+        }
+        dto.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        dto.setUserId(userId);
+        dto.setCreateTime(new Date());
+        dto.setUpdateTime(new Date());
+        if (!dto.getTemperature().contains("°C")){
+            dto.setTemperature(dto.getTemperature() + "°C");
+        }
+        userHealthDao.InsertHealthInfo(dto);
+        return ResResult.success("填报成功");
+    }
+
 }
