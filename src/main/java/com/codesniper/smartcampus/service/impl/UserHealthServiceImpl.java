@@ -53,7 +53,9 @@ public class UserHealthServiceImpl implements UserHealthService {
     @Override
     public UserHealth getUserHealthDetail(String id) {
         UserHealth item = userHealthDao.getUserHealthDetail(id);
-        item.setTemperature(item.getTemperature() + "°C");
+        if (!item.getTemperature().contains("°C")){
+            item.setTemperature(item.getTemperature() + "°C");
+        }
         return item;
     }
 
