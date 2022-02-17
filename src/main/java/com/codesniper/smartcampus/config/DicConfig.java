@@ -83,8 +83,9 @@ public class DicConfig {
     public static final Map<String,String> RISK_LEVEL_MAP = new HashMap<String,String>(){
         private static final long serialVersionUID = 1L;
         {
-            put("1","批准");
-            put("0","驳回");
+            put("1","低风险");
+            put("2","中风险");
+            put("3","高风险");
         }
     };
 

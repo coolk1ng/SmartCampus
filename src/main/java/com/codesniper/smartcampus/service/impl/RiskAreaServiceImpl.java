@@ -1,5 +1,6 @@
 package com.codesniper.smartcampus.service.impl;
 
+import com.codesniper.smartcampus.config.DicConfig;
 import com.codesniper.smartcampus.dao.RiskAreaDao;
 import com.codesniper.smartcampus.dto.RiskAreaReq;
 import com.codesniper.smartcampus.entity.RiskArea;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -27,7 +29,11 @@ public class RiskAreaServiceImpl implements RiskAreaService {
     @Override
     public PageInfo<RiskArea> getRiskAreaList(RiskAreaReq dto) {
         PageHelper.startPage(dto.getPageNum()==null ? 1 :dto.getPageNum(),dto.getPageSize()==null ? 10 :dto.getPageSize());
-        return new PageInfo<>(riskAreaDao.getRiskAreaList(dto));
+        List<RiskArea> list = riskAreaDao.getRiskAreaList(dto);
+        for (RiskArea item : list) {
+            item.setRiskLevel(DicConfig.RISK_LEVEL_MAP.get(item.getRiskLevel()));
+        }
+        return new PageInfo<>(list);
     }
 
     @Override
