@@ -35,7 +35,7 @@
         </if>
     </select>
 
-    <select id="queryByUserId" resultType="com.codesniper.smartcampus.entity.ApprovalRecord">
+    <select id="queryByApplyNo" resultType="com.codesniper.smartcampus.entity.ApprovalRecord">
         SELECT *
         FROM T_APPROVAL_RECORD
         WHERE APPLY_NO = #{applyNo}
@@ -47,7 +47,7 @@
             APPROVAL_RESULT=#{approvalResult},
             APPROVAL_REASON=#{approvalReason},
             UPDATE_TIME=#{updateTime}
-        WHERE USER_ID = #{userId}
+        WHERE APPLY_NO = #{applyNo}
     </update>
 </mapper>
 

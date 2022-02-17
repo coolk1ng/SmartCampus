@@ -1,7 +1,6 @@
 package com.codesniper.smartcampus.service.impl;
 
 import com.codesniper.smartcampus.base.ResResult;
-import com.codesniper.smartcampus.config.DicConfig;
 import com.codesniper.smartcampus.dao.ApprovalRecordDao;
 import com.codesniper.smartcampus.dao.UserInfoDao;
 import com.codesniper.smartcampus.dto.ApprovalRecordReq;
@@ -43,19 +42,18 @@ public class ApprovalRecordServiceImpl implements ApprovalRecordService {
         //设置字典值
         for (ApprovalRecord item : list) {
             item.setApprovalPerson(userInfo.getName());
-            item.setApprovalResult(DicConfig.APPROVAL_RESULT_MAP.get(item.getApprovalResult()));
         }
         return new PageInfo<>(list);
     }
 
     @Override
     public ApprovalRecord getDetail(String applyNo) {
-        return approvalRecordDao.queryByUserId(applyNo);
+        return approvalRecordDao.queryByApplyNo(applyNo);
     }
 
     @Override
     public ResResult editApprovalRecord(ApprovalRecord dto) {
-        ApprovalRecord item = approvalRecordDao.queryByUserId(dto.getUserId());
+        ApprovalRecord item = approvalRecordDao.queryByApplyNo(dto.getApplyNo());
         if (null==item){
             return ResResult.fail("无此条记录");
         }
