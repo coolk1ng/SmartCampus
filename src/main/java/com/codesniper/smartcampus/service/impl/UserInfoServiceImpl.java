@@ -122,9 +122,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserInfo getDetail(String userId) {
         UserInfo userInfo = userInfoDao.queryById(userId);
-        userInfo.setSex(DicConfig.GENDER_MAP.get(userInfo.getSex()));
-        userInfo.setPoliticalStatus(DicConfig.POLITICAL_STATUS_MAP.get(userInfo.getPoliticalStatus()));
-        userInfo.setCognition(DicConfig.JOB_LEVEL_MAP.get(userInfo.getCognition()));
+        //字典值
+        //userInfo.setSex(DicConfig.GENDER_MAP.get(userInfo.getSex()));
+        //userInfo.setPoliticalStatus(DicConfig.POLITICAL_STATUS_MAP.get(userInfo.getPoliticalStatus()));
+        //userInfo.setCognition(DicConfig.JOB_LEVEL_MAP.get(userInfo.getCognition()));
         return userInfo;
     }
 }
