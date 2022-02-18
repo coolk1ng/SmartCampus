@@ -22,6 +22,9 @@
         <if test="isFever!=null and isFever!=''">
             AND IS_FEVER =#{isFever}
         </if>
+        <if test="name!=null and name!=''">
+            AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
+        </if>
         <if test="healthCodeColor!=null and healthCodeColor!=''">
             AND HEALTH_CODE_COLOR =#{healthCodeColor}
         </if>

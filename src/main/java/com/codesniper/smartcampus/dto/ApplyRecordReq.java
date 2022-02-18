@@ -47,4 +47,6 @@ public class ApplyRecordReq extends PageParams{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "申请时间")
     private Date applyTime;
+
+    private String applyState;
 }
