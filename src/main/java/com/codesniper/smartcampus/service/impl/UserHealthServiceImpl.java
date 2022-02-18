@@ -43,8 +43,8 @@ public class UserHealthServiceImpl implements UserHealthService {
             item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
             item.setIsContactRisk(DicConfig.YES_AND_NO_MAP.get(item.getIsContactRisk()));
             item.setIsTrue(DicConfig.YES_AND_NO_MAP.get(item.getIsTrue()));
-            if (!item.getTemperature().contains("°C")){
-                item.setTemperature(item.getTemperature() + "°C");
+            if (!item.getTemperature().contains("℃")){
+                item.setTemperature(item.getTemperature() + "℃");
             }
         }
         return new PageInfo<>(list);
@@ -53,8 +53,8 @@ public class UserHealthServiceImpl implements UserHealthService {
     @Override
     public UserHealth getUserHealthDetail(String id) {
         UserHealth item = userHealthDao.getUserHealthDetail(id);
-        if (!item.getTemperature().contains("°C")){
-            item.setTemperature(item.getTemperature() + "°C");
+        if (!item.getTemperature().contains("℃")){
+            item.setTemperature(item.getTemperature() + "℃");
         }
         return item;
     }
@@ -63,7 +63,7 @@ public class UserHealthServiceImpl implements UserHealthService {
     @Transactional
     public void updateUserHealth(UserHealth dto) {
         dto.setUpdateTime(new Date());
-        dto.setTemperature(dto.getTemperature().replaceAll("°C",""));
+        dto.setTemperature(dto.getTemperature().replaceAll("℃",""));
         userHealthDao.updateUserHealth(dto);
     }
 
@@ -74,10 +74,13 @@ public class UserHealthServiceImpl implements UserHealthService {
         dto.setManagerId(managerId);
         List<UserHealth> list = userHealthDao.getHealthListByManager(dto);
         //映射字典值
-        /*for (UserHealth item : list) {
-            item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
-            item.setIsFever(DicConfig.YES_AND_NO_MAP.get(item.getIsFever()));
-        }*/
+        for (UserHealth item : list) {
+            if (!item.getTemperature().contains("℃")){
+                item.setTemperature(item.getTemperature() + "℃");
+                item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
+                item.setIsFever(DicConfig.YES_AND_NO_MAP.get(item.getIsFever()));
+            }
+        }
         return new PageInfo<>(list);
     }
 
@@ -92,8 +95,8 @@ public class UserHealthServiceImpl implements UserHealthService {
         dto.setUserId(userId);
         dto.setCreateTime(new Date());
         dto.setUpdateTime(new Date());
-        if (!dto.getTemperature().contains("°C")){
-            dto.setTemperature(dto.getTemperature() + "°C");
+        if (!dto.getTemperature().contains("℃")){
+            dto.setTemperature(dto.getTemperature() + "℃");
         }
         userHealthDao.InsertHealthInfo(dto);
         return ResResult.success("填报成功");
