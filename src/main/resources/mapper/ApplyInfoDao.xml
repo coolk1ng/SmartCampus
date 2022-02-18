@@ -40,7 +40,7 @@
         WHERE a.ID = #{id}
     </select>
 
-    <insert id="InsertToApplication" parameterType="com.codesniper.smartcampus.entity.ApplyInfo">
+    <insert id="insertToApplication" parameterType="com.codesniper.smartcampus.entity.ApplyInfo">
         INSERT INTO T_APPLY_INFO
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id!=null and id!=''">
@@ -151,4 +151,10 @@
         </trim>
     </insert>
 
+    <update id="deleteApplyRecord" parameterType="java.util.Arrays">
+        UPDATE T_APPLY_INFO SET IS_DELETE ='1' WHERE APPLY_NO IN
+        <foreach collection="array" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

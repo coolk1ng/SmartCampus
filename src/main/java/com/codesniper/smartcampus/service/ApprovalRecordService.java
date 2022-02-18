@@ -33,4 +33,11 @@ public interface ApprovalRecordService {
      * @return void
      */
     ResResult editApprovalRecord(ApprovalRecord dto);
+
+    /**
+     * 删除审批记录
+     * @param applyNo
+     * @return void
+     */
+    void deleteApprovalRecord(String applyNo);
 }

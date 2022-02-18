@@ -56,6 +56,6 @@ public class ApplyInfoServiceImpl implements ApplyInfoService {
         dto.setUpdateTime(new Date());
         //设置用户的上级管理员id
         dto.setManagerId(userInfo.getManagerId());
-        applyInfoDao.InsertToApplication(dto);
+        applyInfoDao.insertToApplication(dto);
     }
 }

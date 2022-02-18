@@ -34,7 +34,13 @@ public interface ApplyInfoDao {
      * @param dto
      * @return void
      */
-    void InsertToApplication(ApplyInfo dto);
+    void insertToApplication(ApplyInfo dto);
 
+    /**
+     * 删除申请信息
+     * @param arr
+     * @return void
+     */
+    void deleteApplyRecord(String[] arr);
 }
 

@@ -26,7 +26,7 @@
         UPDATE_TIME,
         CREATE_TIME
         FROM T_APPROVAL_RECORD
-        WHERE APPROVAL_PERSON=#{approvalPerson}
+        WHERE IS_DELETE = '0' AND  APPROVAL_PERSON=#{approvalPerson}
         <if test="name!=null and name!=''">
             AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
         </if>
@@ -48,6 +48,13 @@
             APPROVAL_REASON=#{approvalReason},
             UPDATE_TIME=#{updateTime}
         WHERE APPLY_NO = #{applyNo}
+    </update>
+
+    <update id="deleteApprovalRecord" parameterType="java.util.Arrays">
+        UPDATE T_APPROVAL_RECORD SET IS_DELETE ='1' WHERE APPLY_NO IN
+        <foreach collection="array" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
     </update>
 </mapper>
 

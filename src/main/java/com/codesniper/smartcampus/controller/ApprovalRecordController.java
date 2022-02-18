@@ -51,5 +51,13 @@ public class ApprovalRecordController {
         logger.info("编辑参数:{}",JSON.toJSONString(dto));
         return approvalRecordService.editApprovalRecord(dto);
     }
+
+    @PostMapping(value = "/deleteApprovalRecord")
+    @ApiOperation(value = "删除审批记录")
+    public ResResult deleteApprovalRecord(String applyNos){
+        logger.info("删除参数:{}",applyNos);
+        approvalRecordService.deleteApprovalRecord(applyNos);
+        return ResResult.success("删除成功");
+    }
 }
 

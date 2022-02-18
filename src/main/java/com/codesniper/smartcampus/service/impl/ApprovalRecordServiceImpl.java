@@ -1,6 +1,7 @@
 package com.codesniper.smartcampus.service.impl;
 
 import com.codesniper.smartcampus.base.ResResult;
+import com.codesniper.smartcampus.dao.ApplyInfoDao;
 import com.codesniper.smartcampus.dao.ApprovalRecordDao;
 import com.codesniper.smartcampus.dao.UserInfoDao;
 import com.codesniper.smartcampus.dto.ApprovalRecordReq;
@@ -13,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -30,6 +32,8 @@ public class ApprovalRecordServiceImpl implements ApprovalRecordService {
     private ApprovalRecordDao approvalRecordDao;
     @Autowired
     private UserInfoDao userInfoDao;
+    @Autowired
+    private ApplyInfoDao applyInfoDao;
 
     @Override
     public PageInfo<ApprovalRecord> getApprovalRecordList(ApprovalRecordReq dto) {
@@ -52,6 +56,7 @@ public class ApprovalRecordServiceImpl implements ApprovalRecordService {
     }
 
     @Override
+    @Transactional
     public ResResult editApprovalRecord(ApprovalRecord dto) {
         ApprovalRecord item = approvalRecordDao.queryByApplyNo(dto.getApplyNo());
         if (null==item){
@@ -59,5 +64,13 @@ public class ApprovalRecordServiceImpl implements ApprovalRecordService {
         }
         dto.setUpdateTime(new Date());
         return ResResult.success(approvalRecordDao.editApprovalRecord(dto));
+    }
+
+    @Override
+    @Transactional
+    public void deleteApprovalRecord(String applyNos) {
+        String[] arr = applyNos.split(",");
+        approvalRecordDao.deleteApprovalRecord(arr);
+        applyInfoDao.deleteApplyRecord(arr);
     }
 }

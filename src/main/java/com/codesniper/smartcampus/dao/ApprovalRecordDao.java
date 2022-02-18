@@ -35,5 +35,11 @@ public interface ApprovalRecordDao {
      */
     Integer editApprovalRecord(ApprovalRecord dto);
 
+    /**
+     * 删除审批记录
+     * @param arr
+     * @return void
+     */
+    void deleteApprovalRecord(String[] arr);
 }
 
