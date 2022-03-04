@@ -70,7 +70,6 @@ public class UserHealthServiceImpl implements UserHealthService {
         for (UserHealth item : list) {
             item.setHealthCodeColor(DicConfig.HEALTH_CODE_COLOR_MAP.get(item.getHealthCodeColor()));
             item.setIsFever(DicConfig.YES_AND_NO_MAP.get(item.getIsFever()));
-
         }
         return new PageInfo<>(list);
     }

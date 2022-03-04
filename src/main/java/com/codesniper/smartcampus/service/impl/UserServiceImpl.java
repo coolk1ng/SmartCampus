@@ -91,13 +91,20 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public ResResult updatePersonalInfo(UserInfo dto) {
         String redisKey = "menu_";
+        String id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+        UserInfo personalInfo = userDao.getPersonalInfo(id);
         if (StringUtils.isBlank(dto.getUserId())){
             return ResResult.fail("不存在的用户");
         }
         User user = new User();
         user.setUserId(dto.getUserId());
         user.setUsername(dto.getUserName());
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        //如果密码修改,需要加密
+        if (StringUtils.equals(personalInfo.getPassword(),dto.getPassword())){
+            user.setPassword(dto.getPassword());
+        }else{
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        }
         user.setName(dto.getName());
         //编辑User表
         userDao.updateUser(user);
