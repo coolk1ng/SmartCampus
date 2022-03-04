@@ -1,11 +1,12 @@
 package com.codesniper.smartcampus.entity;
 
-import java.util.Date;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户信息表(UserInfo)实体类
@@ -76,17 +77,24 @@ public class UserInfo implements Serializable {
      */     
     private String motherTel; 
     /**
-     * 政治面貌
+     * 政治面貌code
      */     
-    private String politicalStatus; 
+    private String politicalStatus;
+
+    //政治面貌value
+    private String politicalStatusValue;
     /**
      * 年龄
      */     
     private String age; 
     /**
-     * 任职情况
+     * 任职情况code
      */
-    private String cognition; 
+    private String cognition;
+    /**
+     * 任职情况value
+     */
+    private String cognitionValue;
     /**
      * 创建时间
      */
@@ -127,5 +135,10 @@ public class UserInfo implements Serializable {
     private String password;
 
     private String currentAddress;
+
+    /**
+     * 性别value
+     */
+    private String sexValue;
 }
 

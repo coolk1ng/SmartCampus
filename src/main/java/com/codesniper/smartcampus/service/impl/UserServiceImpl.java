@@ -2,10 +2,9 @@ package com.codesniper.smartcampus.service.impl;
 
 import com.codesniper.smartcampus.base.ResResult;
 import com.codesniper.smartcampus.config.DicConfig;
-import com.codesniper.smartcampus.config.RedisConfig;
 import com.codesniper.smartcampus.config.security.JwtTokenUtil;
-import com.codesniper.smartcampus.entity.User;
 import com.codesniper.smartcampus.dao.UserDao;
+import com.codesniper.smartcampus.entity.User;
 import com.codesniper.smartcampus.entity.UserInfo;
 import com.codesniper.smartcampus.service.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -82,9 +81,9 @@ public class UserServiceImpl implements UserService {
     public UserInfo getPersonalInfo(String userId) {
         String id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
         UserInfo personalInfo = userDao.getPersonalInfo(id);
-        personalInfo.setSex(DicConfig.GENDER_MAP.get(personalInfo.getSex()));
-        personalInfo.setPoliticalStatus(DicConfig.POLITICAL_STATUS_MAP.get(personalInfo.getPoliticalStatus()));
-        personalInfo.setCognition(DicConfig.JOB_LEVEL_MAP.get(personalInfo.getCognition()));
+        personalInfo.setSexValue(DicConfig.GENDER_MAP.get(personalInfo.getSex()));
+        personalInfo.setPoliticalStatusValue(DicConfig.POLITICAL_STATUS_MAP.get(personalInfo.getPoliticalStatus()));
+        personalInfo.setCognitionValue(DicConfig.JOB_LEVEL_MAP.get(personalInfo.getCognition()));
         return personalInfo;
     }
 
