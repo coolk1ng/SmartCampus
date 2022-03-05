@@ -70,5 +70,10 @@ public class ApprovalRecord implements Serializable {
      */
     private String isDelete;
 
+    /**
+     * 管理员名称
+     */
+    private String approvalPersonName;
+
 }
 

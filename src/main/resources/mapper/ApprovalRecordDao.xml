@@ -15,29 +15,32 @@
     </resultMap>
 
     <select id="getApprovalRecordList" resultType="com.codesniper.smartcampus.entity.ApprovalRecord" parameterType="com.codesniper.smartcampus.dto.ApprovalRecordReq">
-        SELECT ID,
-        NAME,
-        USER_ID,
-        APPLY_NO,
-        APPROVAL_PERSON,
-        APPROVAL_RESULT,
-        APPROVAL_REASON,
-        APPROVAL_TIME,
-        UPDATE_TIME,
-        CREATE_TIME
-        FROM T_APPROVAL_RECORD
-        WHERE IS_DELETE = '0' AND  APPROVAL_PERSON=#{approvalPerson}
+        SELECT a.ID,
+        a.NAME,
+        a.USER_ID,
+        a.APPLY_NO,
+        a.APPROVAL_PERSON,
+        a.APPROVAL_RESULT,
+        a.APPROVAL_REASON,
+        a.APPROVAL_TIME,
+        a.UPDATE_TIME,
+        a.CREATE_TIME,
+        b.NAME AS APPROVAL_PERSON_NAME
+        FROM T_APPROVAL_RECORD a LEFT JOIN T_USER_INFO b ON a.APPROVAL_PERSON=b.USER_ID
+        WHERE IS_DELETE = '0' AND APPROVAL_PERSON=#{approvalPerson}
         <if test="name!=null and name!=''">
             AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
         </if>
         <if test="approvalResult!=null and approvalResult!=''">
             AND APPROVAL_RESULT =#{approvalResult}
         </if>
+        GROUP BY APPROVAL_TIME DESC
     </select>
 
     <select id="queryByApplyNo" resultType="com.codesniper.smartcampus.entity.ApprovalRecord">
-        SELECT *
-        FROM T_APPROVAL_RECORD
+        SELECT a.*, b.NAME AS APPROVAL_PERSON_NAME
+        FROM T_APPROVAL_RECORD a
+                 LEFT JOIN T_USER_INFO b ON a.APPROVAL_PERSON = b.USER_ID
         WHERE APPLY_NO = #{applyNo}
     </select>
 
