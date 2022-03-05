@@ -1,11 +1,12 @@
 package com.codesniper.smartcampus.entity;
 
-import java.util.Date;
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 审批记录表(ApprovalRecord)实体类
@@ -62,17 +63,12 @@ public class ApprovalRecord implements Serializable {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date createTime; 
+    private Date createTime;
 
-
-
-
-
-
-
-
-
-
+    /**
+     * 逻辑删除
+     */
+    private String isDelete;
 
 }
 

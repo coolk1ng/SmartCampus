@@ -126,5 +126,10 @@ public class ApplyInfo implements Serializable {
      * 审批的原因
      */
     private String approvalReason;
+
+    /**
+     * 逻辑删除
+     */
+    private String isDelete;
 }
 

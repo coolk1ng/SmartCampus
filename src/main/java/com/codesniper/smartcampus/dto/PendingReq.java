@@ -91,4 +91,6 @@ public class PendingReq extends PageParams{
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date applyTime;
+
+    private String isDelete;
 }

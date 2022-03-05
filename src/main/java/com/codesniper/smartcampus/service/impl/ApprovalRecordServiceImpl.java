@@ -63,6 +63,7 @@ public class ApprovalRecordServiceImpl implements ApprovalRecordService {
             return ResResult.fail("无此条记录");
         }
         dto.setUpdateTime(new Date());
+        dto.setIsDelete("0");
         return ResResult.success(approvalRecordDao.editApprovalRecord(dto));
     }
 

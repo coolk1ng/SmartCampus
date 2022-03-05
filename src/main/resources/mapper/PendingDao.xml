@@ -52,7 +52,10 @@
                 CREATE_TIME,
             </if>
             <if test="updateTime!=null">
-                UPDATE_TIME
+                UPDATE_TIME,
+            </if>
+            <if test="isDelete!=null and isDelete!=''">
+                IS_DELETE
             </if>
         </trim>
         VALUES
@@ -85,7 +88,10 @@
                 #{createTime},
             </if>
             <if test="updateTime!=null">
-                #{updateTime}
+                #{updateTime},
+            </if>
+            <if test="isDelete!=null and isDelete!=''">
+                #{isDelete}
             </if>
         </trim>
     </insert>
