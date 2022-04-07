@@ -3,7 +3,6 @@ package com.codesniper.smartcampus.dao;
 import com.codesniper.smartcampus.dto.StudentManageReq;
 import com.codesniper.smartcampus.dto.UserMenu;
 import com.codesniper.smartcampus.dto.UserRoleDto;
-import com.codesniper.smartcampus.entity.User;
 import com.codesniper.smartcampus.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -35,16 +34,14 @@ public interface UserInfoDao {
     /**
      * 新增
      * @param dto
-     * @return Integer
      */
-    Integer addStudentInfo(UserInfo dto);
+    void addStudentInfo(UserInfo dto);
 
     /**
      * 编辑
      * @param dto
-     * @return Integer
      */
-    Integer EditStudentInfo(UserInfo dto);
+    void editStudentInfo(UserInfo dto);
 
     /**
      * 批量删除

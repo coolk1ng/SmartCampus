@@ -66,7 +66,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             user.setUsername(dto.getStudentId());
             userDao.editUserInfo(user);
             dto.setUpdateTime(new Date());
-            userInfoDao.EditStudentInfo(dto);
+            userInfoDao.editStudentInfo(dto);
             ResResult.success("编辑成功");
         }else{
             //新增
