@@ -5,6 +5,9 @@ server:
     context-path: /smart-campus
 # 数据库配置
 spring:
+  output:
+    ansi:
+      enabled: ALWAYS
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://110.40.236.91:3306/smart_campus?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
