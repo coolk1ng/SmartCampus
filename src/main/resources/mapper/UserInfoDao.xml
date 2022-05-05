@@ -170,7 +170,7 @@
         </trim>
     </insert>
 
-    <update id="EditStudentInfo" parameterType="com.codesniper.smartcampus.entity.UserInfo">
+    <update id="editStudentInfo" parameterType="com.codesniper.smartcampus.entity.UserInfo">
         UPDATE T_USER_INFO
         SET NAME=#{name},
             SEX=#{sex},

@@ -58,7 +58,7 @@
             parameterType="com.codesniper.smartcampus.entity.UserHealth">
         SELECT a.NAME, b.*
         FROM T_USER_INFO a
-        LEFT JOIN T_USER_HEALTH b ON a.USER_ID = b.USER_ID
+        RIGHT JOIN T_USER_HEALTH b ON a.USER_ID = b.USER_ID
         WHERE a.MANAGER_ID =#{managerId}
         <if test="name!=null and name!=''">
             AND a.NAME=#{name}

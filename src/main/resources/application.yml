@@ -2,7 +2,7 @@
 server:
   port: 10086
   servlet:
-    context-path: /smart-campus
+    context-path: /
 # 数据库配置
 spring:
   output:
