@@ -3,7 +3,6 @@ package com.codesniper.smartcampus.dao;
 import com.codesniper.smartcampus.dto.UserHealthReq;
 import com.codesniper.smartcampus.entity.UserHealth;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -49,7 +48,7 @@ public interface UserHealthDao {
      * @param dto
      * @return void
      */
-    void InsertHealthInfo(UserHealth dto);
+    void insertHealthInfo(UserHealth dto);
     
     /** 
      * 查询该用户当天的健康信息

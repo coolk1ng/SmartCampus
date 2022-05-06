@@ -71,7 +71,7 @@
         </if>
     </select>
 
-    <insert id="InsertHealthInfo" parameterType="com.codesniper.smartcampus.entity.UserHealth">
+    <insert id="insertHealthInfo" parameterType="com.codesniper.smartcampus.entity.UserHealth">
         INSERT INTO T_USER_HEALTH
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id!=null and id!=''">

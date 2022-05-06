@@ -31,6 +31,6 @@ public interface ApplyInfoService {
      * @param dto
      * @return void
      */
-    void InsertToApplication(ApplyInfo dto);
+    void insertToApplication(ApplyInfo dto);
 
 }

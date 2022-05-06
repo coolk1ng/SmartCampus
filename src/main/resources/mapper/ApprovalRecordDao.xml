@@ -29,7 +29,7 @@
         FROM T_APPROVAL_RECORD a LEFT JOIN T_USER_INFO b ON a.APPROVAL_PERSON=b.USER_ID
         WHERE IS_DELETE = '0' AND APPROVAL_PERSON=#{approvalPerson}
         <if test="name!=null and name!=''">
-            AND NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
+            AND a.NAME LIKE CONCAT('%',CONCAT(#{name},'%'))
         </if>
         <if test="approvalResult!=null and approvalResult!=''">
             AND APPROVAL_RESULT =#{approvalResult}

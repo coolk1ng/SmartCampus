@@ -44,12 +44,14 @@ public class ApplyInfoServiceImpl implements ApplyInfoService {
     }
 
     @Override
-    public void InsertToApplication(ApplyInfo dto) {
+    public void insertToApplication(ApplyInfo dto) {
         String userId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+        String userName = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getName();
         UserInfo userInfo = userInfoDao.queryById(userId);
         dto.setId(UUID.randomUUID().toString().replaceAll("-",""));
         dto.setApplyNo(UUID.randomUUID().toString().replaceAll("-",""));
         dto.setUserId(userId);
+        dto.setName(userName);
         dto.setApplyState("1");
         dto.setApplyTime(new Date());
         dto.setCreateTime(new Date());

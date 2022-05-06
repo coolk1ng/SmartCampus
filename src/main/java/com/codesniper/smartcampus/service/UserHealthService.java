@@ -45,6 +45,12 @@ public interface UserHealthService {
      * @param dto
      * @return void
      */
-    ResResult InsertHealthInfo(UserHealth dto);
+    ResResult insertHealthInfo(UserHealth dto);
+
+    /**
+     * 当日健康信息
+     * @return UserHealth
+     */
+    UserHealth getHealthInfoToday();
 
 }

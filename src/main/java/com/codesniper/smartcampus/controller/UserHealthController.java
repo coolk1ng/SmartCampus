@@ -10,7 +10,9 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
@@ -62,8 +64,13 @@ public class UserHealthController {
     @ApiOperation(value = "新增填报信息")
     public ResResult insertHealthInfo(UserHealth dto){
         logger.info("新增填报信息参数:{}",JSON.toJSONString(dto));
-        return ResResult.success(userHealthService.InsertHealthInfo(dto));
+        return userHealthService.insertHealthInfo(dto);
     }
 
+    @PostMapping(value = "/getHealthInfoToday")
+    @ApiOperation(value = "查询今日的健康信息")
+    public ResResult getHealthInfoToday(){
+        return ResResult.success(userHealthService.getHealthInfoToday());
+    }
 }
 

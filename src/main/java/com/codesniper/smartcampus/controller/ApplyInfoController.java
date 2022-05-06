@@ -49,7 +49,7 @@ public class ApplyInfoController {
     @ApiOperation(value = "用户申请")
     public ResResult doApplication(ApplyInfo dto){
         logger.info("申请信息参数:{}",JSON.toJSONString(dto));
-        applyInfoService.InsertToApplication(dto);
+        applyInfoService.insertToApplication(dto);
         return ResResult.success("申请成功");
     }
 }

@@ -2,10 +2,10 @@ package com.codesniper.smartcampus.service.impl;
 
 import com.codesniper.smartcampus.base.ResResult;
 import com.codesniper.smartcampus.config.DicConfig;
+import com.codesniper.smartcampus.dao.UserHealthDao;
 import com.codesniper.smartcampus.dto.UserHealthReq;
 import com.codesniper.smartcampus.entity.User;
 import com.codesniper.smartcampus.entity.UserHealth;
-import com.codesniper.smartcampus.dao.UserHealthDao;
 import com.codesniper.smartcampus.service.UserHealthService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -76,7 +76,7 @@ public class UserHealthServiceImpl implements UserHealthService {
 
     @Override
     @Transactional
-    public ResResult InsertHealthInfo(UserHealth dto) {
+    public ResResult insertHealthInfo(UserHealth dto) {
         String userId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
         if (null != userHealthDao.getHealthInfoToday(userId)) {
             return ResResult.fail("今日已填报");
@@ -85,8 +85,15 @@ public class UserHealthServiceImpl implements UserHealthService {
         dto.setUserId(userId);
         dto.setCreateTime(new Date());
         dto.setUpdateTime(new Date());
-        userHealthDao.InsertHealthInfo(dto);
+        userHealthDao.insertHealthInfo(dto);
         return ResResult.success("填报成功");
     }
+
+    @Override
+    public UserHealth getHealthInfoToday() {
+        String userId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+        return userHealthDao.getHealthInfoToday(userId);
+    }
+
 
 }
