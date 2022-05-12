@@ -32,6 +32,7 @@
         <if test="applyTime!=null">
             AND APPLY_TIME =#{applyTime}
         </if>
+        ORDER BY APPLY_TIME DESC
     </select>
 
     <select id="getApplyRecordDetail" resultType="com.codesniper.smartcampus.entity.ApplyInfo">
